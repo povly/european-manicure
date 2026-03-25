@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Setting\Pages;
 
+use App\MoonShine\Resources\BaseFormPage;
 use App\MoonShine\Resources\Setting\SettingResource;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Laravel\Pages\Crud\FormPage;
@@ -17,7 +18,7 @@ use Povly\MoonshineInterventionImage\Fields\InterventionImage;
 /**
  * @extends FormPage<SettingResource>
  */
-final class SettingFormPage extends FormPage
+final class SettingFormPage extends BaseFormPage
 {
     protected function fields(): iterable
     {
@@ -49,14 +50,14 @@ final class SettingFormPage extends FormPage
                             InterventionImage::make(__('Logo'), 'logo')
                                 ->disk('public')
                                 ->dir('settings')
-                                ->removable(attributes: $this->getResource()->getRemovableLayoutImageAttributes('logo')),
+                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('logo')),
 
                             Json::make(__('Info'), 'info')
                                 ->fields([
                                     InterventionImage::make(__('Icon'), 'icon')
                                         ->disk('public')
                                         ->dir('settings')
-                                        ->removable(attributes: $this->getResource()->getRemovableLayoutImageAttributes('icon', 'info')),
+                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('icon', 'info')),
                                     Text::make(__('Text'), 'text'),
                                 ]),
 
@@ -67,7 +68,7 @@ final class SettingFormPage extends FormPage
                                     InterventionImage::make(__('Icon'), 'icon')
                                         ->disk('public')
                                         ->dir('settings')
-                                        ->removable(attributes: $this->getResource()->getRemovableLayoutImageAttributes('icon', 'socials')),
+                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('icon', 'socials')),
                                 ])
                                 ->removable()
                                 ->creatable(),

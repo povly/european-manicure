@@ -104,21 +104,4 @@ class BaseResource extends ModelResource
         }
     }
 
-    public function getRemovableLayoutImageAttributes(string $name, ?string $jsonField = null): array
-    {
-        if (! $this->getItemID()) {
-            return [];
-        }
-
-        return [
-            'data-async-url' => $this->getRouter()->getEndpoints()->method(
-                'removeLayoutImageData',
-                params: ['resourceItem' => $this->getItemID()]
-            ),
-            'data-json-field' => $jsonField,
-            '@click.prevent' => $jsonField
-                ? "removeLayoutJsonImage(\$event, '{$name}', '{$jsonField}')"
-                : "removeLayoutImage(\$event, '{$name}')",
-        ];
-    }
 }

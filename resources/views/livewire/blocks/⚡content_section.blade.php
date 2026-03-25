@@ -12,76 +12,111 @@ new class extends Component {
 };
 ?>
 
-<section class="content-section">
+<section class="content-section section">
     <div class="container">
-        @isset($data['title'])
-            <h2 class="content-section__title">{{ $data['title'] }}</h2>
-        @endisset
 
-        <div class="content-section__images">
-            @isset($data['image_mobile'])
-                <div class="content-section__image content-section__image--mobile">
-                    <x-image
-                        src="{{ $data['image_mobile'] }}"
-                        class="content-section__img"
-                        lazy="true"
-                    />
-                </div>
-            @endisset
+        <div class="content-section__block">
 
             @isset($data['image_desktop'])
-                <div class="content-section__image content-section__image--desktop">
+                <div class="content-section__image img-full content-section__image--pc">
                     <x-image
                         src="{{ $data['image_desktop'] }}"
-                        class="content-section__img"
-                        lazy="true"
+                        width="335"
+                        height="573"
+                        lazy="{{$data['is_lazy']}}"
                     />
                 </div>
             @endisset
+
+            <div class="content-section__inner">
+
+                <div class="content-section__inner-left">
+                    <div class="content-section__top">
+                        @isset($data['title'])
+                            <h2 class="content-section__title section__title">{{ $data['title'] }}</h2>
+                        @endisset
+                        <div class="content-section__icon content-section__icon--mb">
+                            <x-image src="/images/about/about-flow.png" width="54" height="42" from="public"
+                                     lazy="{{$data['is_lazy']}}"/>
+                        </div>
+                    </div>
+
+                    @isset($data['description'])
+                        <div class="content-section__description content-section__description--md">
+                            {!! $data['description'] !!}
+                        </div>
+                    @endisset
+
+                    @if(isset($data['text_1']) || isset($data['text_2']))
+                        <div class="content-section__texts">
+                            @isset($data['text_1'])
+                                <div class="content-section__text">
+                                    {{ $data['text_1'] }}
+                                </div>
+                            @endisset
+
+                            @isset($data['text_2'])
+                                <div class="content-section__text">
+                                    {{ $data['text_2'] }}
+                                </div>
+                            @endisset
+                        </div>
+                    @endif
+                </div>
+
+                <div class="content-section__inner-right">
+                    @isset($data['description_mb_1'])
+                        <div class="content-section__description content-section__description--mb_1">
+                            {!! $data['description_mb_1'] !!}
+                        </div>
+                    @endisset
+
+                    @isset($data['image_mobile'])
+                        <div class="content-section__image img-full content-section__image--mobile">
+                            <x-image
+                                src="{{ $data['image_mobile'] }}"
+                                width="329"
+                                height="310"
+                                lazy="{{$data['is_lazy']}}"
+                            />
+                        </div>
+                    @endisset
+
+                    @isset($data['description_mb_2'])
+                        <div class="content-section__description content-section__description--mb_2">
+                            {!! $data['description_mb_2'] !!}
+                        </div>
+                    @endisset
+
+                    @isset($data['items'])
+                        <div class="content-section__items">
+                            @foreach($data['items'] as $item)
+                                <div class="content-section__item">
+                                    @isset($item['title'])
+                                        <h3 class="content-section__item-title">{{ $item['title'] }}</h3>
+                                    @endisset
+
+                                    @isset($item['image'])
+                                        <div class="content-section__item-image img-full">
+                                            <x-image
+                                                src="{{ $item['image'] }}"
+                                                lazy="{{$data['is_lazy']}}"
+                                                width="100"
+                                                heigth="115"
+                                            />
+                                        </div>
+                                    @endisset
+                                </div>
+                            @endforeach
+                        </div>
+                    @endisset
+
+                        <div class="content-section__icon content-section__icon--pc">
+                            <x-image src="/images/about/about-flow.png" width="72" height="56" from="public"
+                                     lazy="{{$data['is_lazy']}}"/>
+                        </div>
+                </div>
+            </div>
         </div>
-
-        @isset($data['description'])
-            <div class="content-section__description">
-                {!! $data['description'] !!}
-            </div>
-        @endisset
-
-        @if(isset($data['text_1']) || isset($data['text_2']))
-            <div class="content-section__texts">
-                @isset($data['text_1'])
-                    <div class="content-section__text">
-                        {{ $data['text_1'] }}
-                    </div>
-                @endisset
-
-                @isset($data['text_2'])
-                    <div class="content-section__text">
-                        {{ $data['text_2'] }}
-                    </div>
-                @endisset
-            </div>
-        @endif
-
-        @isset($data['items'])
-            <div class="content-section__items">
-                @foreach($data['items'] as $item)
-                    <div class="content-section__item">
-                        @isset($item['image'])
-                            <div class="content-section__item-image">
-                                <x-image
-                                    src="{{ $item['image'] }}"
-                                    class="content-section__item-img"
-                                    lazy="true"
-                                />
-                            </div>
-                        @endisset
-
-                        @isset($item['title'])
-                            <h3 class="content-section__item-title">{{ $item['title'] }}</h3>
-                        @endisset
-                    </div>
-                @endforeach
-            </div>
-        @endisset
     </div>
 </section>

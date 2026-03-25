@@ -63,6 +63,31 @@ a {
     color: currentColor;
 }
 
+.section {
+    padding-top: 100px;
+
+    &__title {
+        font-family: var(--font-bebas);
+        font-size: 56px;
+        line-height: 95%;
+        background: var(--gradient-title);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .section {
+        padding-top: 80px;
+
+        &__title {
+            font-size: fluid-type(768px, 1200px, 56px, 89px);
+        }
+    }
+}
+
 @media screen and (min-width: 1200px) {
     body {
         font-size: fluid-type(1200px, 1920px, 16px, 20px);
@@ -70,5 +95,13 @@ a {
 
     .container {
         padding: 0 fluid-type(1200px, 1920px, 40px, 80px);
+    }
+
+    .section {
+        padding-top: fluid-type(1200px, 1920px, 150px, 200px);
+
+        &__title {
+            font-size: fluid-type(1200px, 1920px, 89px, 140px);
+        }
     }
 }

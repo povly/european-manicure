@@ -22,7 +22,6 @@ class SettingResource extends BaseResource
 
     protected string $column = 'title';
 
-    protected ?PageType $redirectAfterSave = PageType::FORM;
 
     public function getTitle(): string
     {

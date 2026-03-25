@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Page\Pages;
 
+use App\MoonShine\Resources\BaseFormPage;
 use App\MoonShine\Resources\Page\PageResource;
 use MoonShine\CKEditor\Fields\CKEditor;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
@@ -23,7 +24,7 @@ use Povly\MoonshineInterventionImage\Fields\InterventionImage;
 /**
  * @extends FormPage<PageResource>
  */
-final class PageFormPage extends FormPage
+final class PageFormPage extends BaseFormPage
 {
     /**
      * @return list<ComponentContract|FieldContract>
@@ -80,7 +81,9 @@ final class PageFormPage extends FormPage
                                 ->disk('public')
                                 ->dir('pages')
                                 ->removable(attributes: $this->getRemovableLayoutImageAttributes('image_desktop')),
-                            CKEditor::make(__('Description'), 'description'),
+                            CKEditor::make(__('Description (PC)'), 'description'),
+                            CKEditor::make(__('Description 1 (Mobile)'), 'description_mb_1'),
+                            CKEditor::make(__('Description 2 (Mobile)'), 'description_mb_2'),
                             Text::make(__('Text 1'), 'text_1'),
                             Text::make(__('Text 2'), 'text_2'),
                             Json::make(__('Items'), 'items')
@@ -88,7 +91,8 @@ final class PageFormPage extends FormPage
                                     Text::make(__('Title'), 'title'),
                                     InterventionImage::make(__('Image'), 'image')
                                         ->disk('public')
-                                        ->dir('pages'),
+                                        ->dir('pages')
+                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('image', 'items')),
                                 ])
                                 ->removable(),
                             Checkbox::make('Lazy load', 'is_lazy'),
@@ -98,36 +102,6 @@ final class PageFormPage extends FormPage
                         ]
                     ),
             ]),
-        ];
-    }
-
-    public function getRemovableImageAttributes(string $name): array
-    {
-        if (! $this->getResource()?->getItemID()) {
-            return [];
-        }
-
-        return [
-            'data-async-url' => $this->getRouter()->getEndpoints()->method(
-                'removeImageData',
-                params: ['resourceItem' => $this->getResource()->getItemID()]
-            ),
-            '@click.prevent' => "removeImage(\$event, '{$name}')",
-        ];
-    }
-
-    public function getRemovableLayoutImageAttributes(string $name): array
-    {
-        if (! $this->getResource()?->getItemID()) {
-            return [];
-        }
-
-        return [
-            'data-async-url' => $this->getRouter()->getEndpoints()->method(
-                'removeLayoutImageData',
-                params: ['resourceItem' => $this->getResource()->getItemID()]
-            ),
-            '@click.prevent' => "removeLayoutImage(\$event, '{$name}')",
         ];
     }
 
