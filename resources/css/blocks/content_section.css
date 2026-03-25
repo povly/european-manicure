@@ -202,7 +202,7 @@
 
             &--pc {
                 display: flex;
-                margin-right: 22px;
+                margin-right: fluid-type(1200px, 1920px, 22px, 37px);
 
                 img {
                     width: fluid-type(1200px, 1920px, 72px, 113px);
@@ -228,6 +228,10 @@
         &__inner {
             grid-template-columns: 614fr 331fr;
             gap: fluid-type(1200px, 1920px, 86px, 234px);
+        }
+
+        &__texts {
+            grid-template-columns: 220fr 255fr;
         }
     }
 }
