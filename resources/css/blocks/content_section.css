@@ -62,7 +62,7 @@
         }
 
         &-image {
-            height: fluid-type(320px, 768px, 115px, 245px);
+            height: fluid-type(375px, 768px, 115px, 245px);
             border-radius: 3px;
             overflow: hidden;
         }

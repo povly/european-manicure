@@ -125,6 +125,38 @@ final class PageFormPage extends BaseFormPage
                         validation: [
                             'title' => 'required',
                         ]
+                    )
+                    ->addLayout(
+                        __('What Sets Us Apart'),
+                        'what_apart',
+                        [
+                            Text::make(__('Title'), 'title')
+                                ->required(),
+                            CKEditor::make(__('Description'), 'description'),
+                            InterventionImage::make(__('Logo Image'), 'logo_image')
+                                ->disk('public')
+                                ->dir('pages')
+                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('logo_image')),
+                            InterventionImage::make(__('Main Image'), 'main_image')
+                                ->disk('public')
+                                ->dir('pages')
+                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('main_image')),
+                            Json::make(__('Items'), 'items')
+                                ->fields([
+                                    Text::make(__('Title'), 'title')
+                                        ->required(),
+                                    InterventionImage::make(__('Image'), 'image')
+                                        ->disk('public')
+                                        ->dir('pages')
+                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('image', 'items')),
+                                    Textarea::make(__('Description'), 'description'),
+                                ])
+                                ->removable(),
+                            Checkbox::make('Lazy load', 'is_lazy'),
+                        ],
+                        validation: [
+                            'title' => 'required',
+                        ]
                     ),
             ]),
         ];

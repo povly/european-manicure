@@ -34,7 +34,7 @@ new class extends Component {
                             <div class="our-services__item-image img-full">
                                 <x-image
                                     src="{{ $item['image'] }}"
-                                    lazy="{{$data['is_lazy'] ?? false}}"
+                                    lazy="{{$data['is_lazy']}}"
                                 />
                             </div>
                         @endisset
