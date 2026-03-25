@@ -6,15 +6,12 @@ namespace App\MoonShine\Resources\Setting\Pages;
 
 use App\MoonShine\Resources\Setting\SettingResource;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
-use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Layouts\Fields\Layouts;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Fields\Text;
-use MoonShine\UI\Fields\Url;
 use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Text;
 use Povly\MoonshineInterventionImage\Fields\InterventionImage;
 
 /**
@@ -52,14 +49,14 @@ final class SettingFormPage extends FormPage
                             InterventionImage::make(__('Logo'), 'logo')
                                 ->disk('public')
                                 ->dir('settings')
-                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('logo')),
+                                ->removable(attributes: $this->getResource()->getRemovableLayoutImageAttributes('logo')),
 
                             Json::make(__('Info'), 'info')
                                 ->fields([
                                     InterventionImage::make(__('Icon'), 'icon')
                                         ->disk('public')
                                         ->dir('settings')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('icon', 'info')),
+                                        ->removable(attributes: $this->getResource()->getRemovableLayoutImageAttributes('icon', 'info')),
                                     Text::make(__('Text'), 'text'),
                                 ]),
 
@@ -70,7 +67,7 @@ final class SettingFormPage extends FormPage
                                     InterventionImage::make(__('Icon'), 'icon')
                                         ->disk('public')
                                         ->dir('settings')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('icon', 'socials')),
+                                        ->removable(attributes: $this->getResource()->getRemovableLayoutImageAttributes('icon', 'socials')),
                                 ])
                                 ->removable()
                                 ->creatable(),
@@ -79,22 +76,6 @@ final class SettingFormPage extends FormPage
                         ]
                     ),
             ]),
-        ];
-    }
-
-    public function getRemovableLayoutImageAttributes(string $name, ?string $jsonField = null): array
-    {
-        return [
-            'data-async-url' => $this->getResource()
-                ? $this->getRouter()->getEndpoints()->method(
-                    'removeLayoutImageData',
-                    params: ['resourceItem' => $this->getResource()->getItemID()]
-                )
-                : null,
-            'data-json-field' => $jsonField,
-            '@click.prevent' => $jsonField 
-                ? "removeLayoutJsonImage(\$event, '{$name}', '{$jsonField}')"
-                : "removeLayoutImage(\$event, '{$name}')",
         ];
     }
 

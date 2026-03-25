@@ -91,6 +91,7 @@ final class PageFormPage extends FormPage
                                         ->dir('pages'),
                                 ])
                                 ->removable(),
+                            Checkbox::make('Lazy load', 'is_lazy'),
                         ],
                         validation: [
                             'title' => 'required',
@@ -102,26 +103,30 @@ final class PageFormPage extends FormPage
 
     public function getRemovableImageAttributes(string $name): array
     {
+        if (! $this->getResource()?->getItemID()) {
+            return [];
+        }
+
         return [
-            'data-async-url' => $this->getResource()
-                ? $this->getRouter()->getEndpoints()->method(
-                    'removeImageData',
-                    params: ['resourceItem' => $this->getResource()->getItemID()]
-                )
-                : null,
+            'data-async-url' => $this->getRouter()->getEndpoints()->method(
+                'removeImageData',
+                params: ['resourceItem' => $this->getResource()->getItemID()]
+            ),
             '@click.prevent' => "removeImage(\$event, '{$name}')",
         ];
     }
 
     public function getRemovableLayoutImageAttributes(string $name): array
     {
+        if (! $this->getResource()?->getItemID()) {
+            return [];
+        }
+
         return [
-            'data-async-url' => $this->getResource()
-                ? $this->getRouter()->getEndpoints()->method(
-                    'removeLayoutImageData',
-                    params: ['resourceItem' => $this->getResource()->getItemID()]
-                )
-                : null,
+            'data-async-url' => $this->getRouter()->getEndpoints()->method(
+                'removeLayoutImageData',
+                params: ['resourceItem' => $this->getResource()->getItemID()]
+            ),
             '@click.prevent' => "removeLayoutImage(\$event, '{$name}')",
         ];
     }
