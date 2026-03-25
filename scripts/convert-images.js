@@ -49,7 +49,7 @@ async function convertImage(inputPath, outputDir, filename) {
     await image
       .clone()
       .avif({
-        quality: 80,
+        quality: 65,
         effort: 4,
         chromaSubsampling: '4:2:0',
       })
@@ -59,7 +59,7 @@ async function convertImage(inputPath, outputDir, filename) {
     await image
       .clone()
       .webp({
-        quality: 85,
+        quality: 80,
         effort: 4,
         method: 6,
       })
@@ -71,7 +71,7 @@ async function convertImage(inputPath, outputDir, filename) {
       await image
         .clone()
         .jpeg({
-          quality: 90,
+          quality: 85,
           progressive: true,
           mozjpeg: true,
         })
@@ -80,7 +80,7 @@ async function convertImage(inputPath, outputDir, filename) {
       await image
         .clone()
         .png({
-          quality: 90,
+          quality: 85,
           compressionLevel: 9,
           progressive: true,
         })

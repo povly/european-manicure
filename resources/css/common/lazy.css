@@ -1,0 +1,16 @@
+.lazy {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lazy.is-loaded {
+    opacity: 1;
+}
+
+.lazy.is-loading {
+    opacity: 0.5;
+}
+
+.lazy.has-error {
+    opacity: 0.3;
+}

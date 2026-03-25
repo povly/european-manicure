@@ -1,0 +1,182 @@
+.hero {
+    padding-top: 88px;
+
+    &__title {
+        font-size: fluid-type(375px, 768px, 55px, 122px);
+        white-space: nowrap;
+        line-height: 150%;
+        letter-spacing: -0.03em;
+        background: var(--gradient-title);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+        font-family: var(--font-bebas);
+        margin-bottom: 13px;
+        margin-left: fluid-type(375px, 768px, 5px, 7px, true);
+    }
+
+    &__image {
+        &-wrapper {
+            position: relative;
+            height: fluid-type(375px, 768px, 262px, 417px);
+            background: #d4cbc3;
+            border-radius: fluid-type(375px, 768px, 3px, 5px);
+        }
+
+        &-el {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: fluid-type(375px, 768px, 45px, 75px, true);
+            clip-path: polygon(0 0, 100% 0, 100% 89%, 0 89%);
+            width: max-content;
+            margin-left: fluid-type(375px, 768px, 15px, 25px);
+
+            img {
+                width: fluid-type(375px, 768px, 359px, 590px);
+            }
+        }
+    }
+
+    &__decor {
+        position: absolute;
+        color: var(--color-gray-olive);
+        z-index: 2;
+        font-size: fluid-type(375px, 768px, 35px, 55px);
+        line-height: 60%;
+        top: fluid-type(375px, 768px, 6px, 9px);
+        font-family: var(--font-brush);
+
+        &--left {
+            left: fluid-type(375px, 768px, 19px, 34px);
+        }
+
+        &--right {
+            right: fluid-type(375px, 768px, 8px, 18px);
+        }
+    }
+
+    &__subtitle {
+        max-width: 306px;
+        line-height: 150%;
+        text-align: center;
+        margin: 24px auto;
+
+        &--pc {
+            display: none;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .hero {
+        padding-top: fluid-type(768px, 1200px, 111px, 141px);
+
+        &__subtitle {
+            max-width: 417px;
+        }
+
+        &__title {
+            margin-bottom: 54px;
+            line-height: 80%;
+            font-size: fluid-type(768px, 1200px, 122px, 196px);
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .hero {
+        padding-top: fluid-type(1200px, 1920px, 141px, 219px);
+
+        &__inner {
+            height: fluid-type(1200px, 1920px, 325px, 511px);
+        }
+
+        &__title {
+            margin-bottom: fluid-type(1200px, 1920px, 68px, 105px);
+            font-size: fluid-type(1200px, 1920px, 190px, 299px);
+            margin-left: fluid-type(1200px, 1920px, 15px, 18px, true);
+        }
+
+        &__image {
+            &-el {
+                bottom: fluid-type(1200px, 1920px, 65px, 97px, true);
+
+                img {
+                    width: fluid-type(1200px, 1920px, 510px, 780px);
+                }
+            }
+
+            &-wrapper {
+                border-radius: fluid-type(1200px, 1920px, 6px, 10px);
+            }
+        }
+
+        &__subtitle {
+            position: absolute;
+            top: fluid-type(1200px, 1920px, 25px, 30px);
+            margin: 0;
+            text-align: left;
+            left: fluid-type(1200px, 1920px, 30px, 40px);
+            max-width: fluid-type(1200px, 1920px, 350px, 447px);
+
+            &--pc {
+                display: block;
+            }
+
+            &--mb {
+                display: none;
+            }
+        }
+
+        &__decor {
+            line-height: 150%;
+            font-size: fluid-type(1200px, 1920px, 32px, 50px);
+
+            &--left {
+                top: auto;
+                left: fluid-type(1200px, 1920px, 38px, 48px);
+                bottom: fluid-type(1200px, 1920px, 18px, 20px);
+
+                br {
+                    display: none;
+                }
+            }
+
+            &--right {
+                top: 13px;
+                right: fluid-type(1200px, 1920px, 27px, 37px);
+            }
+        }
+
+        &__btn {
+            position: absolute;
+            bottom: fluid-type(1200px, 1920px, 30px, 40px);
+            right: fluid-type(1200px, 1920px, 30px, 40px);
+            min-width: fluid-type(1200px, 1920px, 200px, 300px);
+            padding: fluid-type(1200px, 1920px, 13px, 20px);
+        }
+
+        &__image {
+            &-wrapper {
+                position: static;
+                height: 100%;
+            }
+        }
+
+        &__inner {
+            position: relative;
+        }
+    }
+}
+
+@media screen and (min-width: 1680px) {
+    .hero {
+        &__decor {
+            &--right {
+                top: 3px;
+            }
+        }
+    }
+}

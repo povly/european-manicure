@@ -1,9 +1,21 @@
 :root {
-    --font-montserrat: 'Montserrat', sans-serif;
-    --color-cream: #EFECE3;
-    --color-sky-blue: #8FABD4;
-    --color-ocean-blue: #4A70A9;
-    --color-black: #262626;
+    --font-bebas: 'Bebas Neue', sans-serif;
+    --font-manrope: 'Manrope', sans-serif;
+    --font-brush: 'Deviantly Brush', cursive;
+    --font-helvetica: 'Helvetica Neue', sans-serif;
+
+    --color-charcoal: #4f4f4f;
+    --color-taupe: #7e776f;
+    --color-gray-olive: #807971;
+    --color-white: #ffffff;
+    --color-stone: #a69b8f;
+    --color-stone-ligth: #c6b6a8;
+
+    --gradient-title: linear-gradient(90deg, #807971 0%, #67615a 100%);
+    --gradient-btn: linear-gradient(90deg, #807971 0%, #67615a 100%);
+    --gradient-btn-second: #fff, linear-gradient(90deg, #807971 0%, #67615a 100%);;
+
+
 }
 
 html {
@@ -12,15 +24,51 @@ html {
 }
 
 body {
-    font-family: var(--font-montserrat);
-    font-weight: 400;
+    font-family: var(--font-manrope);
+    font-weight: 500;
     position: relative;
     isolation: isolate;
-    font-size: fluid-type(320px, 1200px, 14px, 20px);
-    color: var(--color-black);
+    font-size: 16px;
+    color: var(--color-charcoal);
     line-height: normal;
+    background: #fffaf4;
 }
 
 .container {
-    padding: 0 10px;
+    padding: 0 23px;
+}
+
+picture {
+    display: flex;
+}
+
+.img-full {
+    width: 100%;
+    height: 100%;
+
+    :is(picture, img){
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: currentColor;
+}
+
+@media screen and (min-width: 1200px) {
+    body {
+        font-size: fluid-type(1200px, 1920px, 16px, 20px);
+    }
+
+    .container {
+        padding: 0 fluid-type(1200px, 1920px, 40px, 80px);
+    }
 }
