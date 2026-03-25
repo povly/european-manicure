@@ -157,6 +157,31 @@ final class PageFormPage extends BaseFormPage
                         validation: [
                             'title' => 'required',
                         ]
+                    )
+                    ->addLayout(
+                        __('Nail Artists'),
+                        'nail_artists',
+                        [
+                            Text::make(__('Title'), 'title')
+                                ->required(),
+                            Json::make(__('Artists'), 'items')
+                                ->fields([
+                                    InterventionImage::make(__('Image'), 'image')
+                                        ->disk('public')
+                                        ->dir('pages')
+                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('image', 'items')),
+                                    Text::make(__('Name'), 'name')
+                                        ->required(),
+                                    Text::make(__('Specialist'), 'specialist'),
+                                    Text::make(__('Button Text'), 'button_text'),
+                                    Text::make(__('Button Link'), 'button_link'),
+                                ])
+                                ->removable(),
+                            Checkbox::make('Lazy load', 'is_lazy'),
+                        ],
+                        validation: [
+                            'title' => 'required',
+                        ]
                     ),
             ]),
         ];

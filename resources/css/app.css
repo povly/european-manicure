@@ -3,4 +3,5 @@
 @import 'common/base.css';
 @import 'common/lazy.css';
 @import 'components/btn.css';
+@import 'components/arrow.css';
 @import 'blocks/header.css';

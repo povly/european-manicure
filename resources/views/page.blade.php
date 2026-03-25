@@ -1,23 +1,49 @@
-@extends('layouts.app')
+<?php
 
-@php
-    $blockStyles = [];
-    $blockScripts = [];
-    foreach ($page->content as $block) {
-        $blockName = $block->getName();
-        $cssPath = resource_path("css/blocks/{$blockName}.css");
-        $jsPath = resource_path("js/blocks/{$blockName}.js");
-        
-        if (file_exists($cssPath)) {
-            $blockStyles[] = "resources/css/blocks/{$blockName}.css";
+$blockDependencies = [];
+
+$dependencyCss = [];
+$dependencyJs = [];
+$blockStyles = [];
+$blockScripts = [];
+
+foreach ($page->content as $block) {
+    $blockName = $block->getName();
+    
+    $cssPath = resource_path("css/blocks/{$blockName}.css");
+    $jsPath = resource_path("js/blocks/{$blockName}.js");
+    
+    if (file_exists($cssPath)) {
+        $blockStyles[] = "resources/css/blocks/{$blockName}.css";
+    }
+    if (file_exists($jsPath)) {
+        $blockScripts[] = "resources/js/blocks/{$blockName}.js";
+    }
+
+    if (isset($blockDependencies[$blockName])) {
+        if (isset($blockDependencies[$blockName]['css'])) {
+            foreach ($blockDependencies[$blockName]['css'] as $url) {
+                $dependencyCss[$url] = true;
+            }
         }
-        if (file_exists($jsPath)) {
-            $blockScripts[] = "resources/js/blocks/{$blockName}.js";
+        if (isset($blockDependencies[$blockName]['js'])) {
+            foreach ($blockDependencies[$blockName]['js'] as $url) {
+                $dependencyJs[$url] = true;
+            }
         }
     }
-@endphp
+}
+
+$dependencyCss = array_keys($dependencyCss);
+$dependencyJs = array_keys($dependencyJs);
+?>
+
+@extends('layouts.app')
 
 @section('head')
+    @foreach($dependencyCss as $url)
+        <link rel="stylesheet" href="{{ $url }}">
+    @endforeach
     @if(!empty($blockStyles))
         @vite($blockStyles)
     @endif
@@ -34,6 +60,9 @@
 @endsection
 
 @section('footer')
+    @foreach($dependencyJs as $url)
+        <script src="{{ $url }}"></script>
+    @endforeach
     @if(!empty($blockScripts))
         @vite($blockScripts)
     @endif

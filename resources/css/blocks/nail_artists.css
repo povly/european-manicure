@@ -1,0 +1,152 @@
+.nail-artists {
+    padding-top: 22px;
+
+    &__title {
+        font-size: 123px;
+        line-height: 1;
+        text-align: center;
+        color: var(--color-stone-ligth);
+        margin-bottom: -16px;
+        font-family: var(--font-brush);
+    }
+
+    &__splide {
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+    }
+
+    &__list {
+        display: flex;
+        user-select: none;
+        gap: 15px;
+    }
+
+    &__slide {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        width: 271px;
+        position: relative;
+        height: 380px;
+        padding: 20px;
+        justify-content: flex-end;
+
+        &-image {
+            border-radius: 4px;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+
+            &::before {
+                content: '';
+                height: 136px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                z-index: 5;
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+            }
+
+            img {
+                opacity: 1;
+            }
+        }
+
+        &-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            color: var(--color-white);
+        }
+
+        &-name {
+            font-family: var(--font-bebas);
+            font-size: 30px;
+            line-height: 95%;
+        }
+
+        &-specialist {
+            line-height: 130%;
+        }
+
+        &-button {
+            padding: 9.5px;
+            min-width: 150px;
+            margin-top: 15px;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .nail-artists {
+        &__list {
+            gap: fluid-type(768px, 1200px, 25px, 29px);
+        }
+
+        &__title {
+            font-size: fluid-type(768px, 1200px, 123px, 370px);
+            margin-bottom: fluid-type(768px, 1200px, 16px, 54px, true);
+        }
+
+        &__slide {
+            height: fluid-type(768px, 1200px, 380px, 496px);
+            width: fluid-type(768px, 1200px, 271px, 353px);
+
+            &-image {
+                &::before {
+                    height: fluid-type(768px, 1200px, 135px, 178px);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .nail-artists {
+        padding-top: 0;
+
+        &__title {
+            font-size: fluid-type(1200px, 1920px, 370px, 582px);
+            margin-bottom: fluid-type(1200px, 1920px, 54px, 90px, true);
+        }
+
+        &__list {
+            gap: fluid-type(1200px, 1920px, 30px, 46px);
+        }
+
+        &__slide {
+            width: fluid-type(1200px, 1920px, 353px, 556px);
+            height: fluid-type(1200px, 1920px, 496px, 780px);
+            padding: fluid-type(1200px, 1920px, 20px, 40px);
+
+            &-image {
+                border-radius: fluid-type(1200px, 1920px, 6px, 10px);
+            }
+
+            &-button {
+                min-width: 125px;
+            }
+
+            &-title {
+                font-size: fluid-type(1200px, 1920px, 30px, 40px);
+            }
+
+            &-button {
+                min-width: fluid-type(1200px, 1920px, 150px, 220px);
+                padding: fluid-type(1200px, 1920px, 9.5px, 15px);
+                margin-top: fluid-type(1200px, 1920px, 15px, 25px);
+            }
+        }
+
+        &__controls {
+            padding: 0 fluid-type(1200px, 1920px, 40px, 80px);
+        }
+    }
+}
