@@ -16,6 +16,7 @@
         "laravel/tinker": "^3.0",
         "livewire/blaze": "^1.0",
         "livewire/livewire": "^4.1",
+        "moonshine/ckeditor": "^3.0",
         "moonshine/layouts-field": "^3.1",
         "moonshine/moonshine": "4.x-dev",
         "povly/moonshine-intervention-image": "^1.5"

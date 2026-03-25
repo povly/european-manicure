@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources\Page\Pages;
 
 use App\MoonShine\Resources\Page\PageResource;
+use MoonShine\CKEditor\Fields\CKEditor;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Slug;
-use MoonShine\UI\Fields\Checkbox;
-use MoonShine\UI\Fields\Text;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Layouts\Fields\Layouts;
 use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
-use MoonShine\UI\Fields\Url;
 use Povly\MoonshineInterventionImage\Fields\InterventionImage;
 
 /**
@@ -30,7 +31,7 @@ final class PageFormPage extends FormPage
     protected function fields(): iterable
     {
         return [
-            Box::make(array(
+            Box::make([
                 ID::make(),
 
                 Text::make(__('Title'), 'title')
@@ -46,7 +47,7 @@ final class PageFormPage extends FormPage
                     ->addLayout(
                         __('Hero Section'),
                         'hero',
-                        array(
+                        [
                             Text::make(__('Title'), 'title')
                                 ->required(),
                             Textarea::make(__('Description (PC)'), 'description'),
@@ -59,13 +60,43 @@ final class PageFormPage extends FormPage
                                 ->disk('public')
                                 ->dir('pages')
                                 ->removable(attributes: $this->getRemovableLayoutImageAttributes('image')),
-                            Checkbox::make('Lazy load', 'is_lazy')
-                        ),
-                        validation: array(
+                            Checkbox::make('Lazy load', 'is_lazy'),
+                        ],
+                        validation: [
                             'title' => 'required',
-                        )
+                        ]
+                    )
+                    ->addLayout(
+                        __('About Studio'),
+                        'content_section',
+                        [
+                            Text::make(__('Title'), 'title')
+                                ->required(),
+                            InterventionImage::make(__('Image (Mobile)'), 'image_mobile')
+                                ->disk('public')
+                                ->dir('pages')
+                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('image_mobile')),
+                            InterventionImage::make(__('Image (Desktop)'), 'image_desktop')
+                                ->disk('public')
+                                ->dir('pages')
+                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('image_desktop')),
+                            CKEditor::make(__('Description'), 'description'),
+                            Text::make(__('Text 1'), 'text_1'),
+                            Text::make(__('Text 2'), 'text_2'),
+                            Json::make(__('Items'), 'items')
+                                ->fields([
+                                    Text::make(__('Title'), 'title'),
+                                    InterventionImage::make(__('Image'), 'image')
+                                        ->disk('public')
+                                        ->dir('pages'),
+                                ])
+                                ->removable(),
+                        ],
+                        validation: [
+                            'title' => 'required',
+                        ]
                     ),
-            )),
+            ]),
         ];
     }
 
@@ -81,6 +112,7 @@ final class PageFormPage extends FormPage
             '@click.prevent' => "removeImage(\$event, '{$name}')",
         ];
     }
+
     public function getRemovableLayoutImageAttributes(string $name): array
     {
         return [

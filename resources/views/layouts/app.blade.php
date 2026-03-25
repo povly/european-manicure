@@ -12,7 +12,9 @@
 
 @yield('header')
 
-@yield('content')
+<main>
+    @yield('content')
+</main>
 
 @yield('footer')
 
