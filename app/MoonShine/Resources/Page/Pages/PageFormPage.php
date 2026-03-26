@@ -17,6 +17,7 @@ use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Json;
+use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use Povly\MoonshineInterventionImage\Fields\InterventionImage;
@@ -236,6 +237,56 @@ final class PageFormPage extends BaseFormPage
                                     Textarea::make(__('Description'), 'description'),
                                 ])
                                 ->removable(),
+                        ],
+                        validation: [
+                            'title' => 'required',
+                        ]
+                    )
+                    ->addLayout(
+                        __('Contact'),
+                        'contact',
+                        [
+                            InterventionImage::make(__('Image'), 'image')
+                                ->disk('public')
+                                ->dir('pages')
+                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('image')),
+                            Text::make(__('Title'), 'title')
+                                ->required(),
+                            Textarea::make(__('Description'), 'description'),
+                            Text::make(__('Contact Info Title'), 'contact_info_title'),
+                            Json::make(__('Contact Info'), 'contact_info')
+                                ->fields([
+                                    InterventionImage::make(__('Icon'), 'icon')
+                                        ->disk('public')
+                                        ->dir('pages')
+                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('icon', 'contact_info')),
+                                    Text::make(__('Text'), 'text'),
+                                ])
+                                ->removable(),
+                            Text::make(__('Socials Title'), 'socials_title'),
+                            Json::make(__('Socials'), 'socials')
+                                ->fields([
+                                    InterventionImage::make(__('Icon'), 'icon')
+                                        ->disk('public')
+                                        ->dir('pages')
+                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('icon', 'socials')),
+                                    Text::make(__('Link'), 'link'),
+                                ])
+                                ->removable(),
+                            Text::make(__('Form Title'), 'form_title'),
+                            Json::make(__('Form Inputs'), 'form_inputs')
+                                ->fields([
+                                    Text::make(__('Label'), 'label'),
+                                    Select::make(__('Type'), 'type')
+                                        ->options([
+                                            'text' => __('Text'),
+                                            'email' => __('Email'),
+                                            'tel' => __('Phone'),
+                                        ])
+                                        ->default('text'),
+                                ])
+                                ->removable(),
+                            Text::make(__('Button Text'), 'button_text'),
                         ],
                         validation: [
                             'title' => 'required',
