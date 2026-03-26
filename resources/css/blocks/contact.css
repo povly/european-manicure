@@ -92,8 +92,35 @@
     
 }
 
+.contact__form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
 .contact__form-button {
     
+}
+
+.contact__success {
+    padding: 1rem;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    color: #155724;
+    margin-bottom: 1rem;
+}
+
+.contact__errors {
+    padding: 1rem;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    color: #721c24;
+    margin-bottom: 1rem;
+}
+
+.contact__errors p {
+    margin: 0;
 }
 
 @media screen and (min-width: 1024px) {

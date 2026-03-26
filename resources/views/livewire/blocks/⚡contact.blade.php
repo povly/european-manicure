@@ -86,30 +86,65 @@ new class extends Component {
                     <h3 class="contact__form-title">{{ $data['form_title'] }}</h3>
                 @endisset
 
-                @isset($data['form_inputs'])
-                    <form class="contact__form" action="#" method="POST">
-                        @csrf
-                        @foreach($data['form_inputs'] as $input)
+                @if(session('success'))
+                    <div class="contact__success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <form class="contact__form" action="{{ route('contact.send') }}" method="POST">
+                    @csrf
+
+                    @if($errors->any())
+                        <div class="contact__errors">
+                            @foreach($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @isset($data['form_inputs'])
+                        @foreach($data['form_inputs'] as $index => $input)
+                            @php
+                                $inputType = $input['type'] ?? 'text';
+                                $inputName = match($inputType) {
+                                    'email' => 'email',
+                                    'tel' => 'phone',
+                                    default => $index === 0 ? 'name' : 'message'
+                                };
+                            @endphp
                             <div class="contact__form-field">
                                 @isset($input['label'])
-                                    <label class="contact__form-label">{{ $input['label'] }}</label>
+                                    <label class="contact__form-label" for="contact_{{ $inputName }}">{{ $input['label'] }}</label>
                                 @endisset
-                                <input 
-                                    type="{{ $input['type'] ?? 'text' }}" 
-                                    name="contact_{{ $loop->index }}"
-                                    class="contact__form-input"
-                                    placeholder="{{ $input['label'] ?? '' }}"
-                                >
+                                @if($inputType === 'text' && $index > 1)
+                                    <textarea 
+                                        name="{{ $inputName }}"
+                                        id="contact_{{ $inputName }}"
+                                        class="contact__form-input contact__form-textarea"
+                                        placeholder="{{ $input['label'] ?? '' }}"
+                                        rows="4"
+                                    >{{ old($inputName) }}</textarea>
+                                @else
+                                    <input 
+                                        type="{{ $inputType }}" 
+                                        name="{{ $inputName }}"
+                                        id="contact_{{ $inputName }}"
+                                        class="contact__form-input"
+                                        placeholder="{{ $input['label'] ?? '' }}"
+                                        value="{{ old($inputName) }}"
+                                    >
+                                @endif
                             </div>
                         @endforeach
+                    @endisset
 
-                        @isset($data['button_text'])
-                            <button type="submit" class="contact__form-button btn">
-                                {{ $data['button_text'] }}
-                            </button>
-                        @endisset
-                    </form>
-                @endisset
+                    @isset($data['button_text'])
+                        <button type="submit" class="contact__form-button btn">
+                            {{ $data['button_text'] }}
+                        </button>
+                    @endisset
+                </form>
             </div>
         </div>
     </div>
