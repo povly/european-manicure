@@ -182,6 +182,45 @@ final class PageFormPage extends BaseFormPage
                         validation: [
                             'title' => 'required',
                         ]
+                    )
+                    ->addLayout(
+                        __('Reviews'),
+                        'reviews',
+                        [
+                            Text::make(__('Title'), 'title')
+                                ->required(),
+                            Json::make(__('Images'), 'images')
+                                ->fields([
+                                    InterventionImage::make(__('Image'), 'image')
+                                        ->disk('public')
+                                        ->dir('pages')
+                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('image', 'images')),
+                                ])
+                                ->removable(),
+                            Text::make(__('Trusted Clients Number'), 'trusted_clients_number'),
+                            Text::make(__('Trusted Clients Text'), 'trusted_clients_text'),
+                            Json::make(__('Reviews'), 'reviews')
+                                ->fields([
+                                    InterventionImage::make(__('Image'), 'image')
+                                        ->disk('public')
+                                        ->dir('pages')
+                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('image', 'reviews')),
+                                    InterventionImage::make(__('Platform Icon'), 'platform_icon')
+                                        ->disk('public')
+                                        ->dir('pages')
+                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('platform_icon', 'reviews')),
+                                    Text::make(__('Platform Text'), 'platform_text'),
+                                    Textarea::make(__('Description'), 'description'),
+                                    Text::make(__('Name'), 'name'),
+                                    Text::make(__('Client Type'), 'client_type'),
+                                ])
+                                ->removable(),
+                            Text::make(__('Subtitle'), 'subtitle'),
+                            Checkbox::make('Lazy load', 'is_lazy'),
+                        ],
+                        validation: [
+                            'title' => 'required',
+                        ]
                     ),
             ]),
         ];

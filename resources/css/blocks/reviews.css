@@ -1,0 +1,274 @@
+.reviews {
+    &__splide {
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+    }
+
+    &__top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 30px;
+
+        &-right {
+            display: none;
+        }
+    }
+
+    &__splide {
+        padding: 2px 0;
+    }
+
+    &__subtitle {
+        font-size: 30px;
+        line-height: 70%;
+        text-align: right;
+        color: var(--color-stone-ligth);
+        font-family: var(--font-brush);
+        max-width: 86px;
+
+        &--pc {
+            display: none;
+        }
+    }
+
+    &__title {
+        max-width: fluid-type(768px, 1200px, 200px, 500px);
+    }
+
+    &__list {
+        display: flex;
+        user-select: none;
+        gap: 15px;
+    }
+
+    &__slide {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        width: 271px;
+        position: relative;
+        min-height: 311px;
+        padding: 20px;
+        border: 1px solid #000;
+        border-radius: 10px;
+        background: var(--color-white);
+        display: flex;
+        flex-direction: column;
+
+        &-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        &-platform {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            border: 1px solid #c6b6a8;
+            border-radius: 15px;
+            padding: 8px 9px;
+            font-size: 10px;
+            line-height: 1;
+            color: #696969;
+        }
+
+        &-description {
+            margin-bottom: 25px;
+
+            &-before {
+                font-size: 52px;
+                line-height: 90%;
+                color: #c6b6a8;
+                font-family: var(--font-helvetica);
+                margin-bottom: -20px;
+            }
+
+            &-text {
+                line-height: 150%;
+            }
+        }
+
+        &-bottom {
+            margin-top: auto;
+            padding-left: 7px;
+            position: relative;
+            display: grid;
+            gap: 3px;
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                height: calc(100% - 4px);
+                width: 1px;
+                background: var(--color-stone-ligth);
+            }
+        }
+
+        &-name {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 130%;
+            color: #696969;
+        }
+
+        &-client-type {
+            font-size: 14px;
+            line-height: 130%;
+            color: #b3b3b3;
+        }
+
+        &-image {
+            width: 52px;
+            height: 52px;
+            border-radius: 100%;
+            overflow: hidden;
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .reviews {
+        &__subtitle {
+            display: none;
+            font-size: fluid-type(1200px, 1920px, 32px, 50px);
+            max-width: fluid-type(1200px, 1920px, 80px, 130px);
+
+            &--pc {
+                display: block;
+            }
+        }
+
+        &__title {
+            max-width: 100%;
+        }
+
+        &__list {
+            gap: fluid-type(1200px, 1920px, 30px, 46px);
+        }
+
+        &__slide {
+            border-radius: fluid-type(1200px, 1920px, 14px, 20px);
+            width: fluid-type(1200px, 1920px, 353px, 556px);
+            padding: fluid-type(1200px, 1920px, 20px, 30px);
+
+            &-top {
+                margin-bottom: fluid-type(1200px, 1920px, 40px, 60px);
+            }
+
+            &-image {
+                width: fluid-type(1200px, 1920px, 63px, 100px);
+                height: fluid-type(1200px, 1920px, 63px, 100px);
+            }
+
+            &-platform {
+                padding: fluid-type(1200px, 1920px, 9px, 15px) fluid-type(1200px, 1920px, 12px, 18px);
+                gap: fluid-type(1200px, 1920px, 5px, 7px);
+                border-radius: fluid-type(1200px, 1920px, 19px, 30px);
+                font-size: fluid-type(1200px, 1920px, 12px, 20px);
+
+                &-icon {
+                    img {
+                        width: fluid-type(1200px, 1920px, 19px, 30px);
+                    }
+                }
+            }
+
+            &-description {
+                margin-bottom: 37px;
+
+                &-before {
+                    font-size: fluid-type(1200px, 1920px, 63px, 100px);
+                }
+
+                &-text {
+                    font-size: fluid-type(1200px, 1920px, 19px, 30px);
+                    line-height: 130%;
+                }
+            }
+
+            &-bottom {
+                padding-left: fluid-type(1200px, 1920px, 9px, 15px);
+
+                &::before {
+                    width: 2px;
+                    height: 100%;
+                    border-radius: 2px;
+                }
+            }
+
+            &-name {
+                font-size: fluid-type(1200px, 1920px, 14px, 20px);
+            }
+
+            &-client-type {
+                font-size: fluid-type(1200px, 1920px, 12px, 16px);
+            }
+        }
+
+        &__bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: fluid-type(1200px, 1920px, 27px, 40px);
+        }
+
+        &__controls {
+            margin-top: 0;
+        }
+
+        &__top {
+            margin-bottom: fluid-type(1200px, 1920px, 30px, 50px);
+
+            &-right {
+                display: flex;
+                align-items: center;
+                gap: fluid-type(1200px, 1920px, 10px, 14px);
+                margin-top: fluid-type(1200px, 1920px, 8px, 13px);
+            }
+        }
+
+        &__images {
+            display: flex;
+
+            &-item {
+                width: fluid-type(1200px, 1920px, 40px, 63px);
+                height: fluid-type(1200px, 1920px, 40px, 63px);
+                border-radius: 100%;
+                overflow: hidden;
+                border: fluid-type(1200px, 1920px, 1px, 2px) solid #fffaf4;
+
+                &:not(:first-child){
+                    margin-left: -10px;
+                }
+            }
+        }
+
+        &__trusted {
+            display: grid;
+            background: linear-gradient(90deg, #807971 0%, #67615a 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: fluid-type(1200px, 1920px, 18px, 28px);
+            line-height: 1;
+            font-family: var(--font-helvetica);
+            gap: 5px;
+
+            &-number {
+                font-weight: 500;
+            }
+
+            &-text {
+                font-weight: 400;
+                font-size: fluid-type(1200px, 1920px, 14px, 20px);
+            }
+        }
+    }
+}

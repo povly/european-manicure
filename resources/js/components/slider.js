@@ -6,18 +6,12 @@ gsap.registerPlugin(Draggable);
 class CustomSlider {
     constructor(container, options = {}) {
         this.container = container;
-        this.track = container.querySelector('[data-slider-track]') 
-            || container.querySelector('.nail-artists__list')
-            || container.querySelector(':scope > ul, :scope > .slider__track');
-        this.slides = Array.from(container.querySelectorAll('[data-slider-slide]:not(.clone)')) 
-            || Array.from(this.track?.querySelectorAll('.nail-artists__slide:not(.clone)')) 
-            || Array.from(this.track?.querySelectorAll(':scope > li, :scope > .slider__slide:not(.clone)') || []);
+        this.track = container.querySelector('[data-slider-track]');
+        this.slides = Array.from(container.querySelectorAll('[data-slider-slide]:not(.clone)'));
         this.controls = container.querySelector('[data-slider-controls]') 
-            || container.parentElement.querySelector('.nail-artists__controls');
-        this.prevBtn = this.controls?.querySelector('[data-slider-prev]') 
-            || this.controls?.querySelector('.nail-artists__arrow--prev');
-        this.nextBtn = this.controls?.querySelector('[data-slider-next]') 
-            || this.controls?.querySelector('.nail-artists__arrow--next');
+            || container.parentElement.querySelector('[data-slider-controls]');
+        this.prevBtn = this.controls?.querySelector('[data-slider-prev]');
+        this.nextBtn = this.controls?.querySelector('[data-slider-next]');
 
         
         this.options = {
@@ -53,9 +47,10 @@ class CustomSlider {
     }
     
     init() {
-        if (!this.track || this.slidesLength === 0) return;
-        
         if (this.container.dataset.initialized) return;
+        
+        if (!this.track || !this.slides || this.slides.length === 0) return;
+        
         this.container.dataset.initialized = 'true';
         
         this.updateBreakpoint();
@@ -110,6 +105,8 @@ class CustomSlider {
     }
     
     updateDimensions() {
+        if (!this.slides || this.slides.length === 0) return;
+        
         this.containerWidth = this.container.offsetWidth;
         
         const slideStyle = getComputedStyle(this.slides[0]);
@@ -137,20 +134,23 @@ class CustomSlider {
     }
     
     cloneSlides() {
+        if (this.slidesLength === 0 || !this.slides || this.slides.length === 0) return;
+        
         this.track.querySelectorAll('.clone').forEach(el => el.remove());
         
+        this.clonesCount = Math.min(this.clonesCount, this.slidesLength);
         const clonesBefore = [];
         const clonesAfter = [];
         
         for (let i = 0; i < this.clonesCount; i++) {
             const slideIndex = this.slidesLength - 1 - i;
-            const clone = this.slides[slideIndex % this.slidesLength].cloneNode(true);
+            const clone = this.slides[slideIndex].cloneNode(true);
             clone.classList.add('clone');
             clonesBefore.push(clone);
         }
         
         for (let i = 0; i < this.clonesCount; i++) {
-            const clone = this.slides[i % this.slidesLength].cloneNode(true);
+            const clone = this.slides[i].cloneNode(true);
             clone.classList.add('clone');
             clonesAfter.push(clone);
         }
@@ -158,9 +158,7 @@ class CustomSlider {
         clonesBefore.forEach(clone => this.track.prepend(clone));
         clonesAfter.forEach(clone => this.track.appendChild(clone));
         
-        this.allSlides = Array.from(this.track.querySelectorAll('[data-slider-slide]')) 
-            || Array.from(this.track.querySelectorAll('.nail-artists__slide')) 
-            || Array.from(this.track.children);
+        this.allSlides = Array.from(this.track.querySelectorAll('[data-slider-slide]'));
         
         this.triggerCallback();
     }
