@@ -61,10 +61,13 @@ $dependencyJs = array_keys($dependencyJs);
 
 @section('footer')
     @include('includes.footer')
+@endsection
+
+@section('scripts')
     @foreach($dependencyJs as $url)
         <script src="{{ $url }}"></script>
     @endforeach
-    @if(!empty($blockScripts))
-        @vite($blockScripts)
-    @endif
+    @foreach($blockScripts as $script)
+        <script src="{{ Vite::asset($script) }}" type="module"></script>
+    @endforeach
 @endsection
