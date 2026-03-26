@@ -60,6 +60,7 @@ $dependencyJs = array_keys($dependencyJs);
 @endsection
 
 @section('footer')
+    @include('includes.footer')
     @foreach($dependencyJs as $url)
         <script src="{{ $url }}"></script>
     @endforeach

@@ -67,6 +67,10 @@ a {
     color: currentColor;
 }
 
+button {
+    cursor: pointer;
+}
+
 .section {
     padding-top: 100px;
 

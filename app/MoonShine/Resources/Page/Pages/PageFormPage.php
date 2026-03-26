@@ -276,6 +276,7 @@ final class PageFormPage extends BaseFormPage
                             Text::make(__('Form Title'), 'form_title'),
                             Text::make(__('Button Text'), 'button_text'),
                             Text::make(__('Success Message'), 'success_message'),
+                            Checkbox::make('Lazy load', 'is_lazy'),
                         ],
                         validation: [
                             'title' => 'required',

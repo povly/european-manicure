@@ -1,0 +1,115 @@
+.footer {
+    margin-top: 70px;
+    border-top: 1px solid var(--color-stone-ligth);
+    padding: 30px 0;
+
+    &__logo {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__name {
+        font-size: fluid-type(375px, 768px, 55px, 122px);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        background: linear-gradient(90deg, #807971 0%, #67615a 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: var(--font-bebas);
+        display: block;
+        text-align: center;
+        margin: 10px 0;
+        margin-left: fluid-type(375px, 768px, 5px, 7px, true);
+        white-space: nowrap;
+    }
+
+    &__inner {
+        font-family: var(--font-helvetica);
+        display: grid;
+        gap: 30px;
+    }
+
+    &__copyright {
+        font-size: fluid-type(375px, 768px, 12px, 14px);
+        line-height: 130%;
+        text-align: center;
+    }
+
+    &__links {
+        display: grid;
+        gap: 20px;
+        text-align: center;
+        font-size: fluid-type(1200px, 1920px, 14px, 20px);
+        line-height: 130%;
+    }
+
+    &__site {
+        text-align: center;
+        font-size: luid-type(1200px, 1920px, 14px, 20px);
+        line-height: 130%;
+        width: 105px;
+        margin: 0 auto;
+
+        a {
+            text-decoration: underline;
+            text-decoration-skip-ink: none;
+        }
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .footer {
+        &__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        &__logo {
+            img {
+                width: fluid-type(768px, 1200px, 40px, 63px);
+            }
+        }
+
+        &__site {
+            margin: 0;
+            width: auto;
+        }
+
+        &__links {
+            display: flex;
+            align-items: center;
+            gap: fluid-type(1200px, 1920px, 20px, 114px);
+        }
+
+        &__name {
+            margin-top: 5px;
+            font-size: fluid-type(768px, 1200px, 122px, 196px);
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .footer {
+        margin-top: fluid-type(1200px, 1920px, 70px, 120px);
+        padding-top: fluid-type(1200px, 1920px, 30px, 45px);
+        padding-bottom: fluid-type(1200px, 1920px, 30px, 50px);
+
+        &__name {
+            font-size: fluid-type(1200px, 1920px, 192px, 299px);
+            margin-left: fluid-type(1200px, 1920px, 15px, 18px, true);
+            margin-bottom: 0;
+        }
+
+        &__copyright {
+            font-size: fluid-type(1200px, 1920px, 14px, 20px);
+        }
+
+        &__logo {
+            img {
+                width: fluid-type(1200px, 1920px, 63px, 99px);
+            }
+        }
+    }
+}

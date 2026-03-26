@@ -7,9 +7,17 @@ new class extends Component
 {
     public array $data = [];
 
-    public function mount(array $data): void
+    public function mount(): void
     {
-        $this->data = $data;
+        $setting = Setting::getBySlug('header');
+        if ($setting?->content) {
+            foreach ($setting->content as $block) {
+                if ($block->getName() === 'header') {
+                    $this->data = $block->getValues();
+                    break;
+                }
+            }
+        }
     }
 };
 ?>

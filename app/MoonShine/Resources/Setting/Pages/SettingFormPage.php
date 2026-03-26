@@ -75,6 +75,28 @@ final class SettingFormPage extends BaseFormPage
 
                             Text::make(__('Button Text'), 'button_text'),
                         ]
+                    )
+                    ->addLayout(
+                        __('Footer'),
+                        'footer',
+                        [
+                            InterventionImage::make(__('Logo'), 'logo')
+                                ->disk('public')
+                                ->dir('settings')
+                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('logo')),
+
+                            Text::make(__('Name'), 'name'),
+
+                            Text::make(__('Copyright'), 'copyright'),
+
+                            Json::make(__('Links'), 'links')
+                                ->fields([
+                                    Text::make(__('Text'), 'text')->required(),
+                                    Text::make(__('URL'), 'url')->required(),
+                                ])
+                                ->removable()
+                                ->creatable(),
+                        ]
                     ),
             ]),
         ];
