@@ -284,9 +284,11 @@ final class PageFormPage extends BaseFormPage
                                             'tel' => __('Phone'),
                                         ])
                                         ->default('text'),
+                                    Text::make(__('Error Message'), 'error_message'),
                                 ])
                                 ->removable(),
                             Text::make(__('Button Text'), 'button_text'),
+                            Text::make(__('Success Message'), 'success_message'),
                         ],
                         validation: [
                             'title' => 'required',

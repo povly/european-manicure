@@ -17,9 +17,32 @@ new class extends Component {
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
             'message' => ['nullable', 'string', 'max:5000'],
         ];
+    }
+
+    protected function messages(): array
+    {
+        $messages = [];
+        
+        if (!empty($this->data['form_inputs'])) {
+            foreach ($this->data['form_inputs'] as $input) {
+                $inputType = $input['type'] ?? 'text';
+                $inputName = match($inputType) {
+                    'email' => 'email',
+                    'tel' => 'phone',
+                    default => isset($input['label']) && str_contains(strtolower($input['label']), 'message') ? 'message' : 'name'
+                };
+                
+                if (!empty($input['error_message']) && !isset($messages["{$inputName}.required"])) {
+                    $messages["{$inputName}.required"] = $input['error_message'];
+                    $messages["{$inputName}.email"] = $input['error_message'];
+                }
+            }
+        }
+        
+        return $messages;
     }
 
     public function mount(array $data): void
@@ -120,38 +143,33 @@ new class extends Component {
                 @endisset
 
                 @if($success)
-                    <div class="contact__success" x-data x-show="true" x-init="setTimeout(() => $el.classList.add('show'), 100)">
-                        {{ __('Your message has been sent successfully!') }}
+                    <div class="contact__success">
+                        {{ $data['success_message'] ?? __('Your message has been sent successfully!') }}
                     </div>
                 @endif
 
                 <form class="contact__form" wire:submit="send">
-                    @if($errors->any())
-                        <div class="contact__errors">
-                            @foreach($errors->all() as $error)
-                                <p>{{ $error }}</p>
-                            @endforeach
-                        </div>
-                    @endif
-
                     @isset($data['form_inputs'])
-                        @foreach($data['form_inputs'] as $index => $input)
+                        @php
+                            $inputIndex = 0;
+                        @endphp
+                        @foreach($data['form_inputs'] as $input)
                             @php
                                 $inputType = $input['type'] ?? 'text';
+                                $isTextarea = $inputType === 'text' && $inputIndex > 1;
                                 $inputName = match($inputType) {
                                     'email' => 'email',
                                     'tel' => 'phone',
-                                    default => $index === 0 ? 'name' : 'message'
+                                    default => $isTextarea ? 'message' : ($inputIndex === 0 ? 'name' : 'message')
                                 };
                             @endphp
                             <div class="contact__form-field">
                                 @isset($input['label'])
-                                    <label class="contact__form-label" for="contact_{{ $inputName }}">{{ $input['label'] }}</label>
+                                    <label class="contact__form-label">{{ $input['label'] }}</label>
                                 @endisset
-                                @if($inputType === 'text' && $index > 1)
+                                @if($isTextarea)
                                     <textarea 
                                         wire:model="{{ $inputName }}"
-                                        id="contact_{{ $inputName }}"
                                         class="contact__form-input contact__form-textarea @error($inputName) is-invalid @enderror"
                                         placeholder="{{ $input['label'] ?? '' }}"
                                         rows="4"
@@ -160,7 +178,6 @@ new class extends Component {
                                     <input 
                                         type="{{ $inputType }}" 
                                         wire:model="{{ $inputName }}"
-                                        id="contact_{{ $inputName }}"
                                         class="contact__form-input @error($inputName) is-invalid @enderror"
                                         placeholder="{{ $input['label'] ?? '' }}"
                                     >
@@ -169,6 +186,7 @@ new class extends Component {
                                     <span class="contact__form-error">{{ $message }}</span>
                                 @enderror
                             </div>
+                            @php $inputIndex++; @endphp
                         @endforeach
                     @endisset
 
