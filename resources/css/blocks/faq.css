@@ -1,54 +1,173 @@
 .faq {
-    
+    &__subtitle {
+        display: none;
+    }
+
+    &__title {
+        max-width: fluid-type(768px, 1200px, 210px, 326px);
+    }
+
+    &__block {
+        display: grid;
+        gap: 30px;
+    }
+
+    &__item {
+        padding: 15px 0;
+        border-bottom: 1px solid var(--color-stone-ligth);
+
+        &:first-child {
+            border-top: 1px solid var(--color-stone-ligth);
+        }
+
+        &.active {
+            .faq__item-icon-line {
+                rect {
+                    &:nth-child(2){
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        &-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        &-title {
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 130%;
+            color: var(--color-charcoal)
+        }
+
+        &-content {
+            height: 0;
+            overflow: hidden;
+            transition: .3s;
+        }
+
+        &-icon {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            position: relative;
+
+            svg {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                height: auto;
+            }
+
+            &-line {
+                width: 23px;
+            }
+
+            &-bg {
+                width: 42px;
+
+                rect {
+                    stroke-width: 1px;
+                }
+            }
+        }
+
+        &-description {
+            padding-top: 15px;
+            line-height: 130%;
+        }
+    }
 }
 
-.faq__title {
-    
+@media screen and (min-width: 1200px) {
+    .faq {
+        &__block {
+            display: grid;
+            gap: 78px;
+            grid-template-columns: 326fr 718fr;
+        }
+
+        &__title {
+            max-width: 100%;
+        }
+
+        &__left {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        &__subtitle {
+            display: block;
+            font-weight: 600;
+            font-size: fluid-type(1200px, 1920px, 25px, 30px);
+            line-height: 130%;
+        }
+
+        &__item {
+            padding: 30px 0;
+
+            &:first-child {
+                padding-top: 0;
+                border-top: none;
+            }
+
+            &-title {
+                font-size: fluid-type(1200px, 1920px, 25px, 30px);
+            }
+
+            &-description {
+                padding-top: luid-type(1200px, 1920px, 19px, 28px);
+            }
+
+            &-icon {
+                width: 55px;
+                height: 55px;
+
+                &-line {
+                    width: 30px;
+                }
+
+                &-bg {
+                    width: 55px;
+
+                    rect {
+                        stroke-width: 1.5px;
+                    }
+                }
+            }
+        }
+    }
 }
 
-.faq__subtitle {
-    
-}
+@media screen and (min-width: 1680px) {
+    .faq {
+        &__block {
+            gap: 81px;
+            grid-template-columns: 526fr 1158fr;
+        }
 
-.faq__list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+        &__item {
+            &-icon {
+                width: 60px;
+                height: 60px;
 
-.faq__item {
-    
-}
+                &-line {
+                    width: 35px;
+                }
 
-.faq__item-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    cursor: pointer;
-}
-
-.faq__item-title {
-    
-}
-
-.faq__item-icon {
-    
-}
-
-.faq__item-icon svg {
-    transition: transform 0.3s ease;
-}
-
-.faq__item.active .faq__item-icon svg {
-    transform: rotate(45deg);
-}
-
-.faq__item-content {
-    overflow: hidden;
-    transition: height 0.3s ease;
-}
-
-.faq__item-description {
-    
+                &-bg {
+                    width: 60px;
+                }
+            }
+        }
+    }
 }
