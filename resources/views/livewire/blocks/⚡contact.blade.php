@@ -1,13 +1,46 @@
 <?php
 
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 new class extends Component {
     public array $data = [];
+    public string $name = '';
+    public string $email = '';
+    public string $phone = '';
+    public string $message = '';
+    public bool $success = false;
+
+    protected function rules(): array
+    {
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:255'],
+            'message' => ['nullable', 'string', 'max:5000'],
+        ];
+    }
 
     public function mount(array $data): void
     {
         $this->data = $data;
+    }
+
+    public function send(): void
+    {
+        $this->validate();
+
+        Mail::to(config('mail.from.address'))
+            ->send(new ContactMail([
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+                'message' => $this->message,
+            ]));
+
+        $this->reset(['name', 'email', 'phone', 'message']);
+        $this->success = true;
     }
 };
 ?>
@@ -86,15 +119,13 @@ new class extends Component {
                     <h3 class="contact__form-title">{{ $data['form_title'] }}</h3>
                 @endisset
 
-                @if(session('success'))
-                    <div class="contact__success">
-                        {{ session('success') }}
+                @if($success)
+                    <div class="contact__success" x-data x-show="true" x-init="setTimeout(() => $el.classList.add('show'), 100)">
+                        {{ __('Your message has been sent successfully!') }}
                     </div>
                 @endif
 
-                <form class="contact__form" action="{{ route('contact.send') }}" method="POST">
-                    @csrf
-
+                <form class="contact__form" wire:submit="send">
                     @if($errors->any())
                         <div class="contact__errors">
                             @foreach($errors->all() as $error)
@@ -119,29 +150,32 @@ new class extends Component {
                                 @endisset
                                 @if($inputType === 'text' && $index > 1)
                                     <textarea 
-                                        name="{{ $inputName }}"
+                                        wire:model="{{ $inputName }}"
                                         id="contact_{{ $inputName }}"
-                                        class="contact__form-input contact__form-textarea"
+                                        class="contact__form-input contact__form-textarea @error($inputName) is-invalid @enderror"
                                         placeholder="{{ $input['label'] ?? '' }}"
                                         rows="4"
-                                    >{{ old($inputName) }}</textarea>
+                                    ></textarea>
                                 @else
                                     <input 
                                         type="{{ $inputType }}" 
-                                        name="{{ $inputName }}"
+                                        wire:model="{{ $inputName }}"
                                         id="contact_{{ $inputName }}"
-                                        class="contact__form-input"
+                                        class="contact__form-input @error($inputName) is-invalid @enderror"
                                         placeholder="{{ $input['label'] ?? '' }}"
-                                        value="{{ old($inputName) }}"
                                     >
                                 @endif
+                                @error($inputName)
+                                    <span class="contact__form-error">{{ $message }}</span>
+                                @enderror
                             </div>
                         @endforeach
                     @endisset
 
                     @isset($data['button_text'])
-                        <button type="submit" class="contact__form-button btn">
-                            {{ $data['button_text'] }}
+                        <button type="submit" class="contact__form-button btn" wire:loading.attr="disabled">
+                            <span wire:loading.remove>{{ $data['button_text'] }}</span>
+                            <span wire:loading>{{ __('Sending...') }}</span>
                         </button>
                     @endisset
                 </form>
