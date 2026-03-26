@@ -12,7 +12,7 @@ new class extends Component {
 };
 ?>
 
-<section class="faq section">
+<section class="faq section" x-data="{ activeIndex: null }">
     <div class="container">
         @isset($data['title'])
             <h2 class="faq__title section__title">{{ $data['title'] }}</h2>
@@ -25,8 +25,11 @@ new class extends Component {
         @isset($data['questions'])
             <div class="faq__list">
                 @foreach($data['questions'] as $index => $question)
-                    <div class="faq__item" data-faq-item>
-                        <button class="faq__item-header" data-faq-trigger>
+                    <div class="faq__item" :class="{ 'active': activeIndex === {{ $index }} }">
+                        <button 
+                            class="faq__item-header" 
+                            @click="activeIndex = activeIndex === {{ $index }} ? null : {{ $index }}"
+                        >
                             @isset($question['title'])
                                 <span class="faq__item-title">{{ $question['title'] }}</span>
                             @endisset
@@ -37,7 +40,11 @@ new class extends Component {
                             </span>
                         </button>
                         @isset($question['description'])
-                            <div class="faq__item-content" data-faq-content>
+                            <div 
+                                class="faq__item-content" 
+                                x-ref="content{{ $index }}"
+                                x-bind:style="activeIndex === {{ $index }} ? 'height: ' + $refs.content{{ $index }}.scrollHeight + 'px' : 'height: 0'"
+                            >
                                 <div class="faq__item-description">
                                     {!! $question['description'] !!}
                                 </div>

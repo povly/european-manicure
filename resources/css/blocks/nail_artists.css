@@ -126,6 +126,12 @@
             height: fluid-type(1200px, 1920px, 496px, 780px);
             padding: fluid-type(1200px, 1920px, 20px, 40px);
 
+            &:hover {
+                .nail-artists__slide-button {
+                    display: flex;
+                }
+            }
+
             &-image {
                 border-radius: fluid-type(1200px, 1920px, 6px, 10px);
             }
@@ -142,6 +148,7 @@
                 min-width: fluid-type(1200px, 1920px, 150px, 220px);
                 padding: fluid-type(1200px, 1920px, 9.5px, 15px);
                 margin-top: fluid-type(1200px, 1920px, 15px, 25px);
+                display: none;
             }
         }
 

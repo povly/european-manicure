@@ -21,8 +21,8 @@
             transform: translate(-50%, -50%);
             left: 50%;
             top: 50%;
-            width: 100%;
-            height: 100%;
+            width: 52px;
+            height: auto;
         }
 
         &:nth-child(2){
@@ -31,8 +31,28 @@
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 768px) {
     .p-arrows {
         justify-content: flex-end;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .p-arrows {
+        margin-top: fluid-type(1200px, 1920px, 21px, 44px);
+        gap: 15px;
+    }
+
+    .p-arrow {
+        width: fluid-type(1200px, 1920px, 52px, 81px);
+        height: fluid-type(1200px, 1920px, 52px, 81px);
+
+        svg {
+            &:nth-child(1){
+                width: fluid-type(1200px, 1920px, 52px, 81px);
+            }
+            &:nth-child(2){
+                width: fluid-type(1200px, 1920px, 22px, 28px);
+            }
+        }
     }
 }

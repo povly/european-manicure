@@ -32,6 +32,15 @@
 }
 
 @font-face {
+    font-family: 'Helvetica Neue';
+    src: url('/public/fonts/helvetica-neue/HelveticaNeue-Medium.woff2') format('woff2'),
+         url('/public/fonts/helvetica-neue/HelveticaNeue-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
     font-family: 'Bebas Neue';
     src: url('/public/fonts/bebas-neue/BebasNeue-Regular.woff2') format('woff2'),
          url('/public/fonts/bebas-neue/BebasNeue-Regular.woff') format('woff');

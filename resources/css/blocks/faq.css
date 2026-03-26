@@ -45,13 +45,8 @@
 }
 
 .faq__item-content {
-    max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.faq__item.active .faq__item-content {
-    
+    transition: height 0.3s ease;
 }
 
 .faq__item-description {
