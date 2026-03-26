@@ -221,6 +221,25 @@ final class PageFormPage extends BaseFormPage
                         validation: [
                             'title' => 'required',
                         ]
+                    )
+                    ->addLayout(
+                        __('FAQ'),
+                        'faq',
+                        [
+                            Text::make(__('Title'), 'title')
+                                ->required(),
+                            Text::make(__('Subtitle'), 'subtitle'),
+                            Json::make(__('Questions'), 'questions')
+                                ->fields([
+                                    Text::make(__('Title'), 'title')
+                                        ->required(),
+                                    Textarea::make(__('Description'), 'description'),
+                                ])
+                                ->removable(),
+                        ],
+                        validation: [
+                            'title' => 'required',
+                        ]
                     ),
             ]),
         ];

@@ -1,0 +1,59 @@
+.faq {
+    
+}
+
+.faq__title {
+    
+}
+
+.faq__subtitle {
+    
+}
+
+.faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faq__item {
+    
+}
+
+.faq__item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+}
+
+.faq__item-title {
+    
+}
+
+.faq__item-icon {
+    
+}
+
+.faq__item-icon svg {
+    transition: transform 0.3s ease;
+}
+
+.faq__item.active .faq__item-icon svg {
+    transform: rotate(45deg);
+}
+
+.faq__item-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.faq__item.active .faq__item-content {
+    
+}
+
+.faq__item-description {
+    
+}
