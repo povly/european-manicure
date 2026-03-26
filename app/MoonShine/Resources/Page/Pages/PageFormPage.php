@@ -17,7 +17,6 @@ use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Checkbox;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Json;
-use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use Povly\MoonshineInterventionImage\Fields\InterventionImage;
@@ -274,19 +273,6 @@ final class PageFormPage extends BaseFormPage
                                 ])
                                 ->removable(),
                             Text::make(__('Form Title'), 'form_title'),
-                            Json::make(__('Form Inputs'), 'form_inputs')
-                                ->fields([
-                                    Text::make(__('Label'), 'label'),
-                                    Select::make(__('Type'), 'type')
-                                        ->options([
-                                            'text' => __('Text'),
-                                            'email' => __('Email'),
-                                            'tel' => __('Phone'),
-                                        ])
-                                        ->default('text'),
-                                    Text::make(__('Error Message'), 'error_message'),
-                                ])
-                                ->removable(),
                             Text::make(__('Button Text'), 'button_text'),
                             Text::make(__('Success Message'), 'success_message'),
                         ],

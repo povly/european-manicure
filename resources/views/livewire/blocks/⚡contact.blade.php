@@ -7,42 +7,29 @@ use Livewire\Component;
 new class extends Component {
     public array $data = [];
     public string $name = '';
-    public string $email = '';
     public string $phone = '';
-    public string $message = '';
+    public string $email = '';
     public bool $success = false;
 
     protected function rules(): array
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255', 'regex:/^[\d\s\+\-\(\)]+$/'],
             'email' => ['required', 'email', 'max:255'],
-            'phone' => ['required', 'string', 'max:255'],
-            'message' => ['nullable', 'string', 'max:5000'],
         ];
     }
 
     protected function messages(): array
     {
-        $messages = [];
-        
-        if (!empty($this->data['form_inputs'])) {
-            foreach ($this->data['form_inputs'] as $input) {
-                $inputType = $input['type'] ?? 'text';
-                $inputName = match($inputType) {
-                    'email' => 'email',
-                    'tel' => 'phone',
-                    default => isset($input['label']) && str_contains(strtolower($input['label']), 'message') ? 'message' : 'name'
-                };
-                
-                if (!empty($input['error_message']) && !isset($messages["{$inputName}.required"])) {
-                    $messages["{$inputName}.required"] = $input['error_message'];
-                    $messages["{$inputName}.email"] = $input['error_message'];
-                }
-            }
-        }
-        
-        return $messages;
+        return [
+            'name.required' => __('Please enter your full name'),
+            'name.max' => __('Name is too long'),
+            'phone.required' => __('Please enter your phone number'),
+            'phone.regex' => __('Please enter a valid phone number'),
+            'email.required' => __('Please enter your email address'),
+            'email.email' => __('Please enter a valid email address'),
+        ];
     }
 
     public function mount(array $data): void
@@ -59,10 +46,9 @@ new class extends Component {
                 'name' => $this->name,
                 'email' => $this->email,
                 'phone' => $this->phone,
-                'message' => $this->message,
             ]));
 
-        $this->reset(['name', 'email', 'phone', 'message']);
+        $this->reset(['name', 'phone', 'email']);
         $this->success = true;
     }
 };
@@ -149,46 +135,44 @@ new class extends Component {
                 @endif
 
                 <form class="contact__form" wire:submit="send">
-                    @isset($data['form_inputs'])
-                        @php
-                            $inputIndex = 0;
-                        @endphp
-                        @foreach($data['form_inputs'] as $input)
-                            @php
-                                $inputType = $input['type'] ?? 'text';
-                                $isTextarea = $inputType === 'text' && $inputIndex > 1;
-                                $inputName = match($inputType) {
-                                    'email' => 'email',
-                                    'tel' => 'phone',
-                                    default => $isTextarea ? 'message' : ($inputIndex === 0 ? 'name' : 'message')
-                                };
-                            @endphp
-                            <div class="contact__form-field">
-                                @isset($input['label'])
-                                    <label class="contact__form-label">{{ $input['label'] }}</label>
-                                @endisset
-                                @if($isTextarea)
-                                    <textarea 
-                                        wire:model="{{ $inputName }}"
-                                        class="contact__form-input contact__form-textarea @error($inputName) is-invalid @enderror"
-                                        placeholder="{{ $input['label'] ?? '' }}"
-                                        rows="4"
-                                    ></textarea>
-                                @else
-                                    <input 
-                                        type="{{ $inputType }}" 
-                                        wire:model="{{ $inputName }}"
-                                        class="contact__form-input @error($inputName) is-invalid @enderror"
-                                        placeholder="{{ $input['label'] ?? '' }}"
-                                    >
-                                @endif
-                                @error($inputName)
-                                    <span class="contact__form-error">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            @php $inputIndex++; @endphp
-                        @endforeach
-                    @endisset
+                    <div class="contact__form-field">
+                        <label class="contact__form-label">{{ __('Full Name') }}</label>
+                        <input 
+                            type="text" 
+                            wire:model="name"
+                            class="contact__form-input @error('name') is-invalid @enderror"
+                            placeholder="{{ __('Full Name') }}"
+                        >
+                        @error('name')
+                            <span class="contact__form-error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="contact__form-field">
+                        <label class="contact__form-label">{{ __('Phone Number') }}</label>
+                        <input 
+                            type="tel" 
+                            wire:model="phone"
+                            class="contact__form-input @error('phone') is-invalid @enderror"
+                            placeholder="{{ __('Phone Number') }}"
+                        >
+                        @error('phone')
+                            <span class="contact__form-error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="contact__form-field">
+                        <label class="contact__form-label">{{ __('Email') }}</label>
+                        <input 
+                            type="email" 
+                            wire:model="email"
+                            class="contact__form-input @error('email') is-invalid @enderror"
+                            placeholder="{{ __('Email') }}"
+                        >
+                        @error('email')
+                            <span class="contact__form-error">{{ $message }}</span>
+                        @enderror
+                    </div>
 
                     @isset($data['button_text'])
                         <button type="submit" class="contact__form-button btn" wire:loading.attr="disabled">
