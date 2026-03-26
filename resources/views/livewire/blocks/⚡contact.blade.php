@@ -2,6 +2,7 @@
 
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
+use Livewire\Livewire;
 use Livewire\Component;
 
 new class extends Component {
@@ -35,6 +36,15 @@ new class extends Component {
     public function mount(array $data): void
     {
         $this->data = $data;
+    }
+
+    public function isLazy(): bool
+    {
+        if (Livewire::isLivewireRequest()) {
+            return false;
+        }
+
+        return (bool) ($this->data['is_lazy'] ?? false);
     }
 
     public function send(): void
@@ -73,7 +83,7 @@ new class extends Component {
                     <div class="contact__image contact__image--md img-full">
                         <x-image
                             src="{{ $data['image'] }}"
-                            lazy="{{$data['is_lazy'] ?? false}}"
+                            lazy="{{ $this->isLazy() }}"
                             width="329"
                             heigth="617"
                         />
@@ -110,7 +120,7 @@ new class extends Component {
                                             <div class="contact__info-icon">
                                                 <x-image
                                                     src="{{ $item['icon'] }}"
-                                                    lazy="{{$data['is_lazy'] ?? false}}"
+                                                    lazy="{{ $this->isLazy() }}"
                                                     width="30"
                                                     height="30"
                                                 />
@@ -140,7 +150,7 @@ new class extends Component {
                                                     <div class="contact__socials-icon">
                                                         <x-image
                                                             src="{{ $social['icon'] }}"
-                                                            lazy="{{$data['is_lazy'] ?? false}}"
+                                                            lazy="{{ $this->isLazy() }}"
                                                             width="30"
                                                             height="30"
                                                         />
@@ -160,7 +170,7 @@ new class extends Component {
                             <div class="contact__image contact__image--mb img-full">
                                 <x-image
                                     src="{{ $data['image'] }}"
-                                    lazy="{{$data['is_lazy'] ?? false}}"
+                                    lazy="{{ $this->isLazy() }}"
                                     width="329"
                                     heigth="495"
                                 />

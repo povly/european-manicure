@@ -1,5 +1,6 @@
 <?php
 
+use Livewire\Livewire;
 use Livewire\Component;
 
 new class extends Component {
@@ -8,6 +9,15 @@ new class extends Component {
     public function mount(array $data): void
     {
         $this->data = $data;
+    }
+
+    public function isLazy(): bool
+    {
+        if (Livewire::isLivewireRequest()) {
+            return false;
+        }
+
+        return (bool) ($this->data['is_lazy'] ?? false);
     }
 };
 ?>
@@ -31,7 +41,7 @@ new class extends Component {
                                 <div class="reviews__images-item img-full">
                                     <x-image
                                         src="{{ $image['image'] }}"
-                                        lazy="{{$data['is_lazy'] ?? false}}"
+                                        lazy="{{ $this->isLazy() }}"
                                         width="40"
                                         height="40"
                                     />
@@ -66,7 +76,7 @@ new class extends Component {
                                 <div class="reviews__slide-image img-full">
                                     <x-image
                                         src="{{ $review['image'] }}"
-                                        lazy="{{$data['is_lazy'] ?? false}}"
+                                        lazy="{{ $this->isLazy() }}"
                                         width="52"
                                         height="52"
                                     />
@@ -78,7 +88,7 @@ new class extends Component {
                                             <div class="reviews__slide-platform-icon">
                                                 <x-image
                                                     src="{{ $review['platform_icon'] }}"
-                                                    lazy="{{$data['is_lazy'] ?? false}}"
+                                                    lazy="{{ $this->isLazy() }}"
                                                     width="14"
                                                     height="14"
                                                 />

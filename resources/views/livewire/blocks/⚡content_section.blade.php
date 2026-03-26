@@ -1,5 +1,6 @@
 <?php
 
+use Livewire\Livewire;
 use Livewire\Component;
 
 new class extends Component {
@@ -8,6 +9,15 @@ new class extends Component {
     public function mount(array $data): void
     {
         $this->data = $data;
+    }
+
+    public function isLazy(): bool
+    {
+        if (Livewire::isLivewireRequest()) {
+            return false;
+        }
+
+        return (bool) ($this->data['is_lazy'] ?? false);
     }
 };
 ?>
@@ -23,7 +33,7 @@ new class extends Component {
                         src="{{ $data['image_desktop'] }}"
                         width="335"
                         height="573"
-                        lazy="{{$data['is_lazy']}}"
+                        lazy="{{ $this->isLazy() }}"
                     />
                 </div>
             @endisset
@@ -37,7 +47,7 @@ new class extends Component {
                         @endisset
                         <div class="content-section__icon content-section__icon--mb">
                             <x-image src="/images/about/about-flow.png" width="54" height="42" from="public"
-                                     lazy="{{$data['is_lazy']}}"/>
+                                     lazy="{{ $this->isLazy() }}"/>
                         </div>
                     </div>
 
@@ -77,7 +87,7 @@ new class extends Component {
                                 src="{{ $data['image_mobile'] }}"
                                 width="329"
                                 height="310"
-                                lazy="{{$data['is_lazy']}}"
+                                lazy="{{ $this->isLazy() }}"
                             />
                         </div>
                     @endisset
@@ -100,7 +110,7 @@ new class extends Component {
                                         <div class="content-section__item-image img-full">
                                             <x-image
                                                 src="{{ $item['image'] }}"
-                                                lazy="{{$data['is_lazy']}}"
+                                                lazy="{{ $this->isLazy() }}"
                                                 width="100"
                                                 heigth="115"
                                             />
@@ -113,7 +123,7 @@ new class extends Component {
 
                         <div class="content-section__icon content-section__icon--pc">
                             <x-image src="/images/about/about-flow.png" width="72" height="56" from="public"
-                                     lazy="{{$data['is_lazy']}}"/>
+                                     lazy="{{ $this->isLazy() }}"/>
                         </div>
                 </div>
             </div>

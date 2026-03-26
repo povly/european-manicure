@@ -1,5 +1,6 @@
 <?php
 
+use Livewire\Livewire;
 use Livewire\Component;
 
 new class extends Component {
@@ -8,6 +9,15 @@ new class extends Component {
     public function mount(array $data): void
     {
         $this->data = $data;
+    }
+
+    public function isLazy(): bool
+    {
+        if (Livewire::isLivewireRequest()) {
+            return false;
+        }
+
+        return (bool) ($this->data['is_lazy'] ?? false);
     }
 };
 ?>
@@ -26,7 +36,7 @@ new class extends Component {
                         <div class="what-apart__logo">
                             <x-image
                                 src="{{ $data['logo_image'] }}"
-                                lazy="{{$data['is_lazy']}}"
+                                lazy="{{ $this->isLazy() }}"
                                 width="89"
                                 heigth="46"
                             />
@@ -53,7 +63,7 @@ new class extends Component {
                                     <div class="what-apart__item-image img-full">
                                         <x-image
                                             src="{{ $item['image'] }}"
-                                            lazy="{{$data['is_lazy'] ?? false}}"
+                                            lazy="{{ $this->isLazy() }}"
                                         />
                                     </div>
                                 @endisset
@@ -75,7 +85,7 @@ new class extends Component {
                     <div class="what-apart__image img-full">
                         <x-image
                             src="{{ $data['main_image'] }}"
-                            lazy="{{$data['is_lazy']}}"
+                            lazy="{{ $this->isLazy() }}"
                             width="335"
                             heigth="572"
                         />

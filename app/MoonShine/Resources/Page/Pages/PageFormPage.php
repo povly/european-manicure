@@ -242,6 +242,22 @@ final class PageFormPage extends BaseFormPage
                         ]
                     )
                     ->addLayout(
+                        __('Gallery'),
+                        'gallery',
+                        [
+                            Text::make(__('Text 1'), 'text_1'),
+                            Text::make(__('Text 2'), 'text_2'),
+                            Text::make(__('Text 3'), 'text_3'),
+                            Text::make(__('Text 4'), 'text_4'),
+                            InterventionImage::make(__('Images'), 'images')
+                                ->disk('public')
+                                ->dir('pages')
+                                ->multiple()
+                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('images')),
+                            Checkbox::make('Lazy load', 'is_lazy'),
+                        ]
+                    )
+                    ->addLayout(
                         __('Contact'),
                         'contact',
                         [

@@ -4,7 +4,9 @@
             @isset($footerData['logo'])
                 <x-image
                     src="{{ $footerData['logo'] }}"
-                    lazy="0"
+                    lazy="1"
+                    width="50"
+                    hewigth="42"
                 />
             @endisset
         </a>
