@@ -56,131 +56,178 @@ new class extends Component {
 
 <section class="contact section">
     <div class="container">
+
+        @isset($data['title'])
+            <h2 class="contact__title contact__title--md section__title">{{ $data['title'] }}</h2>
+        @endisset
+
+        @isset($data['description'])
+            <div class="contact__description contact__description--md">
+                {!! $data['description'] !!}
+            </div>
+        @endisset
+
         <div class="contact__grid">
             <div class="contact__left">
                 @isset($data['image'])
-                    <div class="contact__image img-full">
+                    <div class="contact__image contact__image--md img-full">
                         <x-image
                             src="{{ $data['image'] }}"
                             lazy="{{$data['is_lazy'] ?? false}}"
+                            width="329"
+                            heigth="617"
                         />
-                    </div>
-                @endisset
-
-                @isset($data['title'])
-                    <h2 class="contact__title section__title">{{ $data['title'] }}</h2>
-                @endisset
-
-                @isset($data['description'])
-                    <div class="contact__description">
-                        {!! $data['description'] !!}
-                    </div>
-                @endisset
-
-                @isset($data['contact_info_title'])
-                    <h3 class="contact__info-title">{{ $data['contact_info_title'] }}</h3>
-                @endisset
-
-                @isset($data['contact_info'])
-                    <div class="contact__info-list">
-                        @foreach($data['contact_info'] as $item)
-                            <div class="contact__info-item">
-                                @isset($item['icon'])
-                                    <div class="contact__info-icon img-full">
-                                        <x-image
-                                            src="{{ $item['icon'] }}"
-                                            lazy="{{$data['is_lazy'] ?? false}}"
-                                        />
-                                    </div>
-                                @endisset
-                                @isset($item['text'])
-                                    <span class="contact__info-text">{{ $item['text'] }}</span>
-                                @endisset
-                            </div>
-                        @endforeach
-                    </div>
-                @endisset
-
-                @isset($data['socials_title'])
-                    <h3 class="contact__socials-title">{{ $data['socials_title'] }}</h3>
-                @endisset
-
-                @isset($data['socials'])
-                    <div class="contact__socials-list">
-                        @foreach($data['socials'] as $social)
-                            <a href="{{ $social['link'] ?? '#' }}" class="contact__socials-item" target="_blank" rel="noopener noreferrer">
-                                @isset($social['icon'])
-                                    <div class="contact__socials-icon img-full">
-                                        <x-image
-                                            src="{{ $social['icon'] }}"
-                                            lazy="{{$data['is_lazy'] ?? false}}"
-                                        />
-                                    </div>
-                                @endisset
-                            </a>
-                        @endforeach
                     </div>
                 @endisset
             </div>
 
             <div class="contact__right">
-                @isset($data['form_title'])
-                    <h3 class="contact__form-title">{{ $data['form_title'] }}</h3>
-                @endisset
 
-                @if($success)
-                    <div class="contact__success">
-                        {{ $data['success_message'] ?? __('Your message has been sent successfully!') }}
-                    </div>
-                @endif
-
-                <form class="contact__form" wire:submit="send">
-                    <div class="contact__form-field">
-                        <label class="contact__form-label">{{ __('Full Name') }}</label>
-                        <input 
-                            type="text" 
-                            wire:model="name"
-                            class="contact__form-input @error('name') is-invalid @enderror"
-                            placeholder="{{ __('Full Name') }}"
-                        >
-                        @error('name')
-                            <span class="contact__form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="contact__form-field">
-                        <label class="contact__form-label">{{ __('Phone Number') }}</label>
-                        <input 
-                            type="tel" 
-                            wire:model="phone"
-                            class="contact__form-input @error('phone') is-invalid @enderror"
-                            placeholder="{{ __('Phone Number') }}"
-                        >
-                        @error('phone')
-                            <span class="contact__form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="contact__form-field">
-                        <label class="contact__form-label">{{ __('Email') }}</label>
-                        <input 
-                            type="email" 
-                            wire:model="email"
-                            class="contact__form-input @error('email') is-invalid @enderror"
-                            placeholder="{{ __('Email') }}"
-                        >
-                        @error('email')
-                            <span class="contact__form-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    @isset($data['button_text'])
-                        <button type="submit" class="contact__form-button btn" wire:loading.attr="disabled">
-                            <span wire:loading.remove>{{ $data['button_text'] }}</span>
-                            <span wire:loading>{{ __('Sending...') }}</span>
-                        </button>
+                <div class="contact__right-top">
+                    @isset($data['title'])
+                        <h2 class="contact__title contact__title--pc section__title">{{ $data['title'] }}</h2>
                     @endisset
-                </form>
+
+                    @isset($data['description'])
+                        <div class="contact__description contact__description--pc">
+                            {!! $data['description'] !!}
+                        </div>
+                    @endisset
+                </div>
+
+                <div class="contact__right-block">
+                    <div class="contact__right-text">
+
+                        @isset($data['contact_info_title'])
+                            <h3 class="contact__info-title">{{ $data['contact_info_title'] }}</h3>
+                        @endisset
+
+                        @isset($data['contact_info'])
+                            <div class="contact__info-list">
+                                @foreach($data['contact_info'] as $item)
+                                    <div class="contact__info-item">
+                                        @isset($item['icon'])
+                                            <div class="contact__info-icon">
+                                                <x-image
+                                                    src="{{ $item['icon'] }}"
+                                                    lazy="{{$data['is_lazy'] ?? false}}"
+                                                    width="30"
+                                                    height="30"
+                                                />
+                                            </div>
+                                        @endisset
+                                        @isset($item['text'])
+                                            <span class="contact__info-text">{!! $item['text'] !!}</span>
+                                        @endisset
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endisset
+
+                        @if($data['socials'] && $data['socials_title'])
+                            <div class="contact__socials">
+                                @isset($data['socials_title'])
+                                    <h3 class="contact__socials-title">{{ $data['socials_title'] }}</h3>
+                                @endisset
+
+                                @isset($data['socials'])
+                                    <div class="contact__socials-list">
+                                        @foreach($data['socials'] as $social)
+                                            <a href="{{ $social['link'] ?? '#' }}" class="contact__socials-item"
+                                               target="_blank"
+                                               rel="noopener noreferrer">
+                                                @isset($social['icon'])
+                                                    <div class="contact__socials-icon">
+                                                        <x-image
+                                                            src="{{ $social['icon'] }}"
+                                                            lazy="{{$data['is_lazy'] ?? false}}"
+                                                            width="30"
+                                                            height="30"
+                                                        />
+                                                    </div>
+                                                @endisset
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @endisset
+                            </div>
+                        @endif
+
+                    </div>
+                    <div class="contact__right-form">
+
+                        @isset($data['image'])
+                            <div class="contact__image contact__image--mb img-full">
+                                <x-image
+                                    src="{{ $data['image'] }}"
+                                    lazy="{{$data['is_lazy'] ?? false}}"
+                                    width="329"
+                                    heigth="495"
+                                />
+                            </div>
+                        @endisset
+
+                        @isset($data['description'])
+                            <div class="contact__description contact__description--mb">
+                                {!! $data['description'] !!}
+                            </div>
+                        @endisset
+
+                        @isset($data['form_title'])
+                            <h3 class="contact__form-title">{{ $data['form_title'] }}</h3>
+                        @endisset
+
+                        @if($success)
+                            <div class="contact__success">
+                                {{ $data['success_message'] ?? __('Your message has been sent successfully!') }}
+                            </div>
+                        @endif
+
+                        <form class="contact__form" wire:submit="send">
+                            <div class="contact__form-field">
+                                <input
+                                    type="text"
+                                    wire:model="name"
+                                    class="contact__form-input @error('name') is-invalid @enderror"
+                                    placeholder="{{ __('Full Name') }}"
+                                >
+                                @error('name')
+                                <span class="contact__form-error">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="contact__form-field">
+                                <input
+                                    type="tel"
+                                    wire:model="phone"
+                                    class="contact__form-input @error('phone') is-invalid @enderror"
+                                    placeholder="{{ __('Phone Number') }}"
+                                >
+                                @error('phone')
+                                <span class="contact__form-error">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="contact__form-field">
+                                <input
+                                    type="email"
+                                    wire:model="email"
+                                    class="contact__form-input @error('email') is-invalid @enderror"
+                                    placeholder="{{ __('Email') }}"
+                                >
+                                @error('email')
+                                <span class="contact__form-error">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            @isset($data['button_text'])
+                                <button type="submit" class="contact__form-button btn" wire:loading.attr="disabled">
+                                    {{ $data['button_text'] }}
+                                </button>
+                            @endisset
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

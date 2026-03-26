@@ -43,6 +43,7 @@
             font-weight: 700;
             font-size: 20px;
             line-height: 130%;
+            text-align: left;
             color: var(--color-charcoal)
         }
 

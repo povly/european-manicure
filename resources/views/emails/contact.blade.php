@@ -33,13 +33,6 @@
                     <td style="padding: 10px 0;">{{ $data['phone'] }}</td>
                 </tr>
             @endisset
-
-            @isset($data['message'])
-                <tr>
-                    <td style="padding: 10px 0; font-weight: bold; vertical-align: top;">{{ __('Message') }}:</td>
-                    <td style="padding: 10px 0;">{{ $data['message'] }}</td>
-                </tr>
-            @endisset
         </table>
 
         <p style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 12px;">

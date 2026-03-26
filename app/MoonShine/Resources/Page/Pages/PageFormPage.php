@@ -260,6 +260,7 @@ final class PageFormPage extends BaseFormPage
                                         ->dir('pages')
                                         ->removable(attributes: $this->getRemovableLayoutImageAttributes('icon', 'contact_info')),
                                     Text::make(__('Text'), 'text'),
+                                    CKEditor::make(__('Text'), 'text'),
                                 ])
                                 ->removable(),
                             Text::make(__('Socials Title'), 'socials_title'),
