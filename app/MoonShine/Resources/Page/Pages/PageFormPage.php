@@ -19,7 +19,7 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
-use Povly\MoonshineInterventionImage\Fields\InterventionImage;
+use YuriZoom\MoonShineMediaManager\Fields\MediaManagerPicker;
 
 /**
  * @extends FormPage<PageResource>
@@ -57,10 +57,8 @@ final class PageFormPage extends BaseFormPage
                             Text::make(__('Text Right'), 'text_right'),
                             Text::make(__('Button Text'), 'button_text'),
                             Text::make(__('Button Link'), 'button_link'),
-                            InterventionImage::make(__('Image'), 'image')
-                                ->disk('public')
-                                ->dir('pages')
-                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('image')),
+                            MediaManagerPicker::make(__('Image'), 'image')
+                                ->allowedTypes(['image']),
                             Checkbox::make('Lazy load', 'is_lazy'),
                         ],
                         validation: [
@@ -73,14 +71,10 @@ final class PageFormPage extends BaseFormPage
                         [
                             Text::make(__('Title'), 'title')
                                 ->required(),
-                            InterventionImage::make(__('Image (Mobile)'), 'image_mobile')
-                                ->disk('public')
-                                ->dir('pages')
-                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('image_mobile')),
-                            InterventionImage::make(__('Image (Desktop)'), 'image_desktop')
-                                ->disk('public')
-                                ->dir('pages')
-                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('image_desktop')),
+                            MediaManagerPicker::make(__('Image (Mobile)'), 'image_mobile')
+                                ->allowedTypes(['image']),
+                            MediaManagerPicker::make(__('Image (Desktop)'), 'image_desktop')
+                                ->allowedTypes(['image']),
                             CKEditor::make(__('Description (PC)'), 'description'),
                             CKEditor::make(__('Description 1 (Mobile)'), 'description_mb_1'),
                             CKEditor::make(__('Description 2 (Mobile)'), 'description_mb_2'),
@@ -89,10 +83,8 @@ final class PageFormPage extends BaseFormPage
                             Json::make(__('Items'), 'items')
                                 ->fields([
                                     Text::make(__('Title'), 'title'),
-                                    InterventionImage::make(__('Image'), 'image')
-                                        ->disk('public')
-                                        ->dir('pages')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('image', 'items')),
+                                    MediaManagerPicker::make(__('Image'), 'image')
+                                        ->allowedTypes(['image']),
                                 ])
                                 ->removable(),
                             Checkbox::make('Lazy load', 'is_lazy'),
@@ -112,10 +104,8 @@ final class PageFormPage extends BaseFormPage
                                 ->fields([
                                     Text::make(__('Title'), 'title')
                                         ->required(),
-                                    InterventionImage::make(__('Image'), 'image')
-                                        ->disk('public')
-                                        ->dir('pages')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('image', 'items')),
+                                    MediaManagerPicker::make(__('Image'), 'image')
+                                        ->allowedTypes(['image']),
                                     Text::make(__('Button Text'), 'button_text'),
                                     Text::make(__('Button Link'), 'button_link'),
                                 ])
@@ -133,22 +123,16 @@ final class PageFormPage extends BaseFormPage
                             Text::make(__('Title'), 'title')
                                 ->required(),
                             CKEditor::make(__('Description'), 'description'),
-                            InterventionImage::make(__('Logo Image'), 'logo_image')
-                                ->disk('public')
-                                ->dir('pages')
-                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('logo_image')),
-                            InterventionImage::make(__('Main Image'), 'main_image')
-                                ->disk('public')
-                                ->dir('pages')
-                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('main_image')),
+                            MediaManagerPicker::make(__('Logo Image'), 'logo_image')
+                                ->allowedTypes(['image']),
+                            MediaManagerPicker::make(__('Main Image'), 'main_image')
+                                ->allowedTypes(['image']),
                             Json::make(__('Items'), 'items')
                                 ->fields([
                                     Text::make(__('Title'), 'title')
                                         ->required(),
-                                    InterventionImage::make(__('Image'), 'image')
-                                        ->disk('public')
-                                        ->dir('pages')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('image', 'items')),
+                                    MediaManagerPicker::make(__('Image'), 'image')
+                                        ->allowedTypes(['image']),
                                     Textarea::make(__('Description'), 'description'),
                                 ])
                                 ->removable(),
@@ -166,10 +150,8 @@ final class PageFormPage extends BaseFormPage
                                 ->required(),
                             Json::make(__('Artists'), 'items')
                                 ->fields([
-                                    InterventionImage::make(__('Image'), 'image')
-                                        ->disk('public')
-                                        ->dir('pages')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('image', 'items')),
+                                    MediaManagerPicker::make(__('Image'), 'image')
+                                        ->allowedTypes(['image']),
                                     Text::make(__('Name'), 'name')
                                         ->required(),
                                     Text::make(__('Specialist'), 'specialist'),
@@ -191,24 +173,18 @@ final class PageFormPage extends BaseFormPage
                                 ->required(),
                             Json::make(__('Images'), 'images')
                                 ->fields([
-                                    InterventionImage::make(__('Image'), 'image')
-                                        ->disk('public')
-                                        ->dir('pages')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('image', 'images')),
+                                    MediaManagerPicker::make(__('Image'), 'image')
+                                        ->allowedTypes(['image']),
                                 ])
                                 ->removable(),
                             Text::make(__('Trusted Clients Number'), 'trusted_clients_number'),
                             Text::make(__('Trusted Clients Text'), 'trusted_clients_text'),
                             Json::make(__('Reviews'), 'reviews')
                                 ->fields([
-                                    InterventionImage::make(__('Image'), 'image')
-                                        ->disk('public')
-                                        ->dir('pages')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('image', 'reviews')),
-                                    InterventionImage::make(__('Platform Icon'), 'platform_icon')
-                                        ->disk('public')
-                                        ->dir('pages')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('platform_icon', 'reviews')),
+                                    MediaManagerPicker::make(__('Image'), 'image')
+                                        ->allowedTypes(['image']),
+                                    MediaManagerPicker::make(__('Platform Icon'), 'platform_icon')
+                                        ->allowedTypes(['image']),
                                     Text::make(__('Platform Text'), 'platform_text'),
                                     Textarea::make(__('Description'), 'description'),
                                     Text::make(__('Name'), 'name'),
@@ -249,11 +225,9 @@ final class PageFormPage extends BaseFormPage
                             Text::make(__('Text 2'), 'text_2'),
                             Text::make(__('Text 3'), 'text_3'),
                             Text::make(__('Text 4'), 'text_4'),
-                            InterventionImage::make(__('Images'), 'images')
-                                ->disk('public')
-                                ->dir('pages')
+                            MediaManagerPicker::make(__('Images'), 'images')
                                 ->multiple()
-                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('images')),
+                                ->allowedTypes(['image']),
                             Checkbox::make('Lazy load', 'is_lazy'),
                         ]
                     )
@@ -261,20 +235,16 @@ final class PageFormPage extends BaseFormPage
                         __('Contact'),
                         'contact',
                         [
-                            InterventionImage::make(__('Image'), 'image')
-                                ->disk('public')
-                                ->dir('pages')
-                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('image')),
+                            MediaManagerPicker::make(__('Image'), 'image')
+                                ->allowedTypes(['image']),
                             Text::make(__('Title'), 'title')
                                 ->required(),
                             Textarea::make(__('Description'), 'description'),
                             Text::make(__('Contact Info Title'), 'contact_info_title'),
                             Json::make(__('Contact Info'), 'contact_info')
                                 ->fields([
-                                    InterventionImage::make(__('Icon'), 'icon')
-                                        ->disk('public')
-                                        ->dir('pages')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('icon', 'contact_info')),
+                                    MediaManagerPicker::make(__('Icon'), 'icon')
+                                        ->allowedTypes(['image']),
                                     Text::make(__('Text'), 'text'),
                                     CKEditor::make(__('Text'), 'text'),
                                 ])
@@ -282,10 +252,8 @@ final class PageFormPage extends BaseFormPage
                             Text::make(__('Socials Title'), 'socials_title'),
                             Json::make(__('Socials'), 'socials')
                                 ->fields([
-                                    InterventionImage::make(__('Icon'), 'icon')
-                                        ->disk('public')
-                                        ->dir('pages')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('icon', 'socials')),
+                                    MediaManagerPicker::make(__('Icon'), 'icon')
+                                        ->allowedTypes(['image']),
                                     Text::make(__('Link'), 'link'),
                                 ])
                                 ->removable(),

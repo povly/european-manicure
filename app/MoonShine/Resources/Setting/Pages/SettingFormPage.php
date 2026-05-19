@@ -13,7 +13,7 @@ use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Text;
-use Povly\MoonshineInterventionImage\Fields\InterventionImage;
+use YuriZoom\MoonShineMediaManager\Fields\MediaManagerPicker;
 
 /**
  * @extends FormPage<SettingResource>
@@ -47,17 +47,13 @@ final class SettingFormPage extends BaseFormPage
                                 ->removable()
                                 ->creatable(),
 
-                            InterventionImage::make(__('Logo'), 'logo')
-                                ->disk('public')
-                                ->dir('settings')
-                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('logo')),
+                            MediaManagerPicker::make(__('Logo'), 'logo')
+                                ->allowedTypes(['image']),
 
                             Json::make(__('Info'), 'info')
                                 ->fields([
-                                    InterventionImage::make(__('Icon'), 'icon')
-                                        ->disk('public')
-                                        ->dir('settings')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('icon', 'info')),
+                                    MediaManagerPicker::make(__('Icon'), 'icon')
+                                        ->allowedTypes(['image']),
                                     Text::make(__('Text'), 'text'),
                                 ]),
 
@@ -65,10 +61,8 @@ final class SettingFormPage extends BaseFormPage
                                 ->fields([
                                     Text::make(__('Name'), 'name'),
                                     Text::make(__('URL'), 'url'),
-                                    InterventionImage::make(__('Icon'), 'icon')
-                                        ->disk('public')
-                                        ->dir('settings')
-                                        ->removable(attributes: $this->getRemovableLayoutImageAttributes('icon', 'socials')),
+                                    MediaManagerPicker::make(__('Icon'), 'icon')
+                                        ->allowedTypes(['image']),
                                 ])
                                 ->removable()
                                 ->creatable(),
@@ -80,10 +74,8 @@ final class SettingFormPage extends BaseFormPage
                         __('Footer'),
                         'footer',
                         [
-                            InterventionImage::make(__('Logo'), 'logo')
-                                ->disk('public')
-                                ->dir('settings')
-                                ->removable(attributes: $this->getRemovableLayoutImageAttributes('logo')),
+                            MediaManagerPicker::make(__('Logo'), 'logo')
+                                ->allowedTypes(['image']),
 
                             Text::make(__('Name'), 'name'),
 
