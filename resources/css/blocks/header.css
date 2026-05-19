@@ -101,7 +101,7 @@
             ul {
                 display: flex;
                 align-items: center;
-                gap: fluid-type(1200px, 1920px, 57px, 108px);
+                gap: fluid-type(1200px, 1920px, 37px, 67px);
             }
         }
 

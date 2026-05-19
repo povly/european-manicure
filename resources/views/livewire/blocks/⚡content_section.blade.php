@@ -22,7 +22,7 @@ new class extends Component {
 };
 ?>
 
-<section class="content-section section">
+<section class="content-section section"  id="content-section">
     <div class="container">
 
         <div class="content-section__block">

@@ -22,7 +22,7 @@ new class extends Component {
 };
 ?>
 
-<section class="hero">
+<section class="hero" id="hero">
     <div class="container">
 
         <h1 class="hero__title">{{ $data['title'] ?? '' }}</h1>
@@ -34,8 +34,8 @@ new class extends Component {
                         <x-image
                             src="{{ $data['image'] }}"
                             class="hero__image"
-                            width="359"
-                            height="372"
+                            width="308"
+                            height="159"
                             lazy="{{ $this->isLazy() }}"
                         />
                     </div>

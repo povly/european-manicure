@@ -64,7 +64,7 @@ new class extends Component {
 };
 ?>
 
-<section class="contact section">
+<section class="contact section" id="contact">
     <div class="container">
 
         @isset($data['title'])

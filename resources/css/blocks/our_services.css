@@ -127,10 +127,10 @@
         &__item {
             height: fluid-type(1200px, 1920px, 354px, 557px);
             justify-content: flex-start;
+            overflow: hidden;
             padding: fluid-type(1200px, 1920px, 30px, 40px);
 
             &-button {
-                display: none;
                 margin-left: 0;
                 min-width: fluid-type(1200px, 1920px, 160px, 250px);
                 padding: fluid-type(1200px, 1920px, 9.5px, 15px);
@@ -150,9 +150,14 @@
                 }
             }
 
+            &-content {
+                transition: .6s;
+                transform: translateY(calc(fluid-type(1200px, 1920px, 30px, 40px) + var(--btn-height)));
+            }
+
             &:hover {
-                .our-services__item-button {
-                    display: block;
+                .our-services__item-content {
+                    transform: translateY(0);
                 }
             }
         }

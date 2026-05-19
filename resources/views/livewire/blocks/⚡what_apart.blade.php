@@ -22,7 +22,7 @@ new class extends Component {
 };
 ?>
 
-<section class="what-apart section">
+<section class="what-apart section" id="what-apart">
     <div class="container">
         <div class="what-apart__block">
 
@@ -45,7 +45,7 @@ new class extends Component {
 
                     @isset($data['description'])
                         <div class="what-apart__description-p">
-                            {!! $data['description'] !!}
+                            {!! str_replace(['<p>', '</p>'], ['<span>', '</span>'], $data['description']) !!}
                         </div>
                     @endisset
                 </div>

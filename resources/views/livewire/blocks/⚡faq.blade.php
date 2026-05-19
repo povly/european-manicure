@@ -12,7 +12,7 @@ new class extends Component {
 };
 ?>
 
-<section class="faq section" x-data="{ activeIndex: null }">
+<section class="faq section" x-data="{ activeIndex: null }" id="faq">
     <div class="container">
         <div class="faq__block">
             <div class="faq__left">

@@ -19,7 +19,8 @@
         "moonshine/ckeditor": "^3.0",
         "moonshine/layouts-field": "^3.1",
         "moonshine/moonshine": "4.x-dev",
-        "povly/moonshine-intervention-image": "^1.5"
+        "povly/moonshine-image-editor": "^1.3",
+        "yurizoom/moonshine-media-manager": "^4.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24",

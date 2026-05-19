@@ -22,7 +22,7 @@ new class extends Component {
 };
 ?>
 
-<section class="gallery section">
+<section class="gallery section" id="gallery">
     <div class="container">
         @php
             $textPositions = [

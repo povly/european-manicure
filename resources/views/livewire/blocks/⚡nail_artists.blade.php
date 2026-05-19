@@ -22,7 +22,7 @@ new class extends Component {
 };
 ?>
 
-<section class="nail-artists section">
+<section class="nail-artists section" id="nail-artists">
     @isset($data['title'])
         <h2 class="nail-artists__title section__title">{{ $data['title'] }}</h2>
     @endisset

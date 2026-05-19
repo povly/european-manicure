@@ -6,13 +6,17 @@ namespace App\MoonShine\Layouts;
 
 use App\MoonShine\Resources\Page\PageResource;
 use App\MoonShine\Resources\Setting\SettingResource;
-use MoonShine\AssetManager\InlineJs;
+use MoonShine\AssetManager\Css;
+use MoonShine\AssetManager\Js;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\ColorManager\Palettes\GrayPalette;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\ColorManager\PaletteContract;
 use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuItem;
+use MoonShine\UI\Components\FlexibleRender;
+use Povly\MoonShineImageEditor\Support\ImageEditorRenderer;
+use YuriZoom\MoonShineMediaManager\Components\MediaManagerOffCanvas;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -25,48 +29,10 @@ final class MoonShineLayout extends AppLayout
     {
         return [
             ...parent::assets(),
-            InlineJs::make(<<<'JS'
-                window.removeImage = function(event, name) {
-                    let button = event.currentTarget;
-                    let imageIndex = button.closest('.dropzone-item')?.dataset.id;
-                    if (imageIndex === undefined) {
-                        return;
-                    }
-                    fetch(`${button.dataset.asyncUrl}&imageIndex=${imageIndex}&name=${name}`)
-                        .then(() => button.closest('.x-removeable')?.remove());
-                };
-                window.removeLayoutImage = function(event, name) {
-                    let button = event.currentTarget;
-                    let accordion = button.closest('.accordion');
-                    let layoutIndex = parseInt(accordion.querySelector('[data-r-index]')?.dataset.rIndex ?? 0);
-                    let imageIndex = button.closest('.dropzone-item')?.dataset.id ?? 0;
-                    
-                    fetch(`${button.dataset.asyncUrl}&imageIndex=${imageIndex}&layoutIndex=${layoutIndex}&name=${name}`)
-                        .then(() => button.closest('.x-removeable')?.remove());
-                };
-                window.removeLayoutJsonImage = function(event, name, jsonField) {
-                    let button = event.currentTarget;
-                    let accordion = button.closest('.accordion');
-                    let layoutIndex = parseInt(accordion.querySelector('[data-r-index]')?.dataset.rIndex ?? 0);
-                    
-                    let jsonRow = button.closest('tr');
-                    let jsonIndex = parseInt(jsonRow?.querySelector('[data-r-index]')?.dataset.rIndex ?? 0);
-                    if (jsonIndex === 0 && jsonRow) {
-                        let hiddenInput = jsonRow.querySelector('input[name*="[' + jsonField + ']"][name*="[hidden_"]');
-                        if (hiddenInput) {
-                            let match = hiddenInput.name.match(new RegExp('\\[' + jsonField + '\\]\\[(\\d+)\\]'));
-                            if (match) {
-                                jsonIndex = parseInt(match[1]);
-                            }
-                        }
-                    }
-                    
-                    let imageIndex = button.closest('.dropzone-item')?.dataset.id ?? 0;
-                    
-                    fetch(`${button.dataset.asyncUrl}&imageIndex=${imageIndex}&layoutIndex=${layoutIndex}&jsonField=${jsonField}&jsonIndex=${jsonIndex}&name=${name}`)
-                        .then(() => button.closest('.x-removeable')?.remove());
-                };
-            JS),
+
+            Css::make('/vendor/image-editor/image-editor.css'),
+            Js::make('/vendor/image-editor/filerobot-image-editor.min.js'),
+            Js::make('/vendor/image-editor/image-editor.js'),
         ];
     }
 
@@ -88,5 +54,17 @@ final class MoonShineLayout extends AppLayout
         parent::colors($colorManager);
 
         // $colorManager->primary('#00000');
+    }
+
+    protected function getContentComponents(): array
+    {
+        return [
+            ...parent::getContentComponents(),
+            MediaManagerOffCanvas::make(),
+
+            FlexibleRender::make(
+                app(ImageEditorRenderer::class)->renderModal(),
+            ),
+        ];
     }
 }

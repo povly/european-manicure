@@ -1,5 +1,5 @@
 {
-  "version": "2.8.0",
+  "version": "2.8.1",
   "agents": [
     {
       "id": "opencode",
@@ -21,6 +21,7 @@
         "aif-improve",
         "aif-loop",
         "aif-plan",
+        "aif-reference",
         "aif-review",
         "aif-roadmap",
         "aif-rules",
@@ -28,13 +29,6 @@
         "aif-skill-generator",
         "aif-verify"
       ],
-      "mcp": {
-        "github": false,
-        "filesystem": false,
-        "postgres": false,
-        "chromeDevtools": false,
-        "playwright": false
-      },
       "managedSkills": {
         "aif": {
           "sourceHash": "6a25230fbbf15f28eb7bda58c0cc87d9a1b017cd5a53f58990e37839b20821b4",
@@ -100,6 +94,10 @@
           "sourceHash": "4cd60cb4ae0ebd8a0c4fcaacbdab5b2698d710a090507000135581b9486b53b9",
           "installedHash": "7fa208733c14888a195a1d7c502a59e9105f647051cc30424ef03202ada3e104"
         },
+        "aif-reference": {
+          "sourceHash": "98382b514211183ad59719ac114cc46f81b48738b8cb14431822d9d5c6c9cb3a",
+          "installedHash": "847e8832feaef73e052f30c0f7563217284eb09ff0efe6fd838b56bb273e6190"
+        },
         "aif-review": {
           "sourceHash": "5b0ee1d5754a679785fa52a45b885e02df4f7b268647e2b6a98c0eadffe49f1a",
           "installedHash": "938883a5fe0eedc3b225adf95af36baa623dad470f169dd48d00bf736c91087c"
@@ -124,6 +122,15 @@
           "sourceHash": "81ce253b20434ab370629524dad8e7e1273aa28d072f0bf1e7431fe16dd2a0df",
           "installedHash": "f0176707c2193e673eb2afc66b6923980d75dd0c64b26fa39f84cd7ea624388e"
         }
+      },
+      "installedSubagents": [],
+      "managedSubagents": {},
+      "mcp": {
+        "github": false,
+        "filesystem": false,
+        "postgres": false,
+        "chromeDevtools": false,
+        "playwright": false
       }
     }
   ],

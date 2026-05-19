@@ -1,5 +1,5 @@
 .hero {
-    padding-top: 88px;
+    padding-top: 85px;
 
     &__title {
         font-size: fluid-type(375px, 768px, 55px, 122px);
@@ -14,6 +14,7 @@
         font-family: var(--font-bebas);
         margin-bottom: 13px;
         margin-left: fluid-type(375px, 768px, 5px, 7px, true);
+        padding-top: 3px;
     }
 
     &__image {
@@ -27,14 +28,12 @@
         &-el {
             position: absolute;
             left: 50%;
-            transform: translateX(-50%);
-            bottom: fluid-type(375px, 768px, 45px, 75px, true);
-            clip-path: polygon(0 0, 100% 0, 100% 89%, 0 89%);
+            top: 50%;
+            transform: translate(-50%, -50%);
             width: max-content;
-            margin-left: fluid-type(375px, 768px, 15px, 25px);
 
             img {
-                width: fluid-type(375px, 768px, 359px, 590px);
+                width: fluid-type(375px, 768px, 308px, 502px);
             }
         }
     }
@@ -101,10 +100,11 @@
 
         &__image {
             &-el {
-                bottom: fluid-type(1200px, 1920px, 65px, 97px, true);
+                top: -36px;
+                transform: translateX(-50%);
 
                 img {
-                    width: fluid-type(1200px, 1920px, 510px, 780px);
+                    width: fluid-type(1200px, 1920px, 502px, 1076px);
                 }
             }
 
@@ -176,6 +176,12 @@
         &__decor {
             &--right {
                 top: 3px;
+            }
+        }
+
+        &__image {
+            &-el {
+                top: -83px;
             }
         }
     }

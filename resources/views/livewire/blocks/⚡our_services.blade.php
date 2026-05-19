@@ -22,7 +22,7 @@ new class extends Component {
 };
 ?>
 
-<section class="our-services section">
+<section class="our-services section" id="our-services">
     <div class="container">
         <div class="our-services__header">
             @isset($data['title'])

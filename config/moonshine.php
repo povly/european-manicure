@@ -1,5 +1,6 @@
 <?php
 
+use App\MoonShine\Layouts\MoonShineLayout;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -7,15 +8,13 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use MoonShine\ColorManager\Palettes\PurplePalette;
+use MoonShine\ColorManager\Palettes\GrayPalette;
 use MoonShine\Crud\Forms\FiltersForm;
 use MoonShine\Crud\Forms\LoginForm;
 use MoonShine\Laravel\Exceptions\MoonShineNotFoundException;
 use MoonShine\Laravel\Http\Middleware\Authenticate;
 use MoonShine\Laravel\Http\Middleware\ChangeLocale;
-use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\Laravel\Models\MoonshineUser;
-use MoonShine\Laravel\Pages\Dashboard;
 use MoonShine\Laravel\Pages\ErrorPage;
 use MoonShine\Laravel\Pages\LoginPage;
 use MoonShine\Laravel\Pages\ProfilePage;
@@ -86,8 +85,8 @@ return [
     ],
 
     // Layout, palette, pages, forms
-    'layout' => App\MoonShine\Layouts\MoonShineLayout::class,
-    'palette' => MoonShine\ColorManager\Palettes\GrayPalette::class,
+    'layout' => MoonShineLayout::class,
+    'palette' => GrayPalette::class,
 
     'forms' => [
         'login' => LoginForm::class,
@@ -106,5 +105,13 @@ return [
     'locale_key' => ChangeLocale::KEY,
     'locales' => [
         // en
+    ],
+
+    'media_manager' => [
+        'auto_menu' => true,
+        'disk' => config('filesystem.default', 'public'),
+        'allowed_ext' => 'jpg,jpeg,png,gif,webp,avif,svg,pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar,txt,mp3,mp4,wav,avi,mov',
+        'max_file_size' => env('MOONSHINE_MEDIA_MANAGER_MAX_FILE_SIZE', 50 * 1024 * 1024),
+        'default_view' => 'table',
     ],
 ];

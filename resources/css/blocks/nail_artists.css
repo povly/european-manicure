@@ -115,6 +115,7 @@
         &__title {
             font-size: fluid-type(1200px, 1920px, 370px, 582px);
             margin-bottom: fluid-type(1200px, 1920px, 54px, 90px, true);
+            margin-left: fluid-type(1200px, 1920px, 100px, 140px);
         }
 
         &__list {
@@ -127,17 +128,18 @@
             padding: fluid-type(1200px, 1920px, 20px, 40px);
 
             &:hover {
-                .nail-artists__slide-button {
-                    display: flex;
+                .nail-artists__slide-content {
+                    transform: translateY(0);
                 }
+            }
+
+            &-content {
+                transition: .3s;
+                transform: translateY(calc(fluid-type(1200px, 1920px, 20px, 40px) + var(--btn-height)));
             }
 
             &-image {
                 border-radius: fluid-type(1200px, 1920px, 6px, 10px);
-            }
-
-            &-button {
-                min-width: 125px;
             }
 
             &-title {
@@ -148,7 +150,7 @@
                 min-width: fluid-type(1200px, 1920px, 150px, 220px);
                 padding: fluid-type(1200px, 1920px, 9.5px, 15px);
                 margin-top: fluid-type(1200px, 1920px, 15px, 25px);
-                display: none;
+                height: var(--btn-height, auto);
             }
         }
 

@@ -2,12 +2,24 @@ import './lazyload.js';
 
 import gsap from 'gsap';
 import Draggable from 'gsap/Draggable';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(Draggable, ScrollTrigger);
+gsap.registerPlugin(Draggable);
 
 window.gsap = gsap;
 window.Draggable = Draggable;
-window.ScrollTrigger = ScrollTrigger;
+
+function observeOnce(el, callback) {
+    const observer = new IntersectionObserver(
+        ([entry], obs) => {
+            if (entry.isIntersecting) {
+                obs.unobserve(entry.target);
+                callback();
+            }
+        },
+        { rootMargin: '0px 0px -15% 0px' }
+    );
+    observer.observe(el);
+}
+window.observeOnce = observeOnce;
 
 import './components/slider.js';
