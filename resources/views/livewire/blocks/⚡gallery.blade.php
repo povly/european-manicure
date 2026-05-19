@@ -8,6 +8,10 @@ new class extends Component {
 
     public function mount(array $data): void
     {
+        if (isset($data['images']) && is_string($data['images'])) {
+            $data['images'] = json_decode($data['images'], true) ?? [];
+        }
+
         $this->data = $data;
     }
 
