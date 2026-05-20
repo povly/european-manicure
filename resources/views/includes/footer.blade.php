@@ -32,7 +32,7 @@
             @endisset
 
             <div class="footer__site">
-                Created by <a href="#!">Pavlo Klymash</a>
+                Created by <a href="https://wa.me/380506118666">Pavlo Klymash</a>
             </div>
         </div>
     </div>

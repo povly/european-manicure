@@ -15,6 +15,7 @@ use MoonShine\Contracts\ColorManager\PaletteContract;
 use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\FlexibleRender;
+use MoonShine\UI\Components\Layout\Footer;
 use Povly\MoonShineImageEditor\Support\ImageEditorRenderer;
 use YuriZoom\MoonShineMediaManager\Components\MediaManagerOffCanvas;
 
@@ -66,5 +67,11 @@ final class MoonShineLayout extends AppLayout
                 app(ImageEditorRenderer::class)->renderModal(),
             ),
         ];
+    }
+
+    protected function getFooterComponent(): Footer
+    {
+        return Footer::make()
+            ->menu($this->getFooterMenu());
     }
 }

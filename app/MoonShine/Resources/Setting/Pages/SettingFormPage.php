@@ -68,6 +68,7 @@ final class SettingFormPage extends BaseFormPage
                                 ->creatable(),
 
                             Text::make(__('Button Text'), 'button_text'),
+                            Text::make(__('Button Link'), 'button_link'),
                         ]
                     )
                     ->addLayout(
