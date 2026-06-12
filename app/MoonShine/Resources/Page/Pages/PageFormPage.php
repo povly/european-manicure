@@ -232,6 +232,19 @@ final class PageFormPage extends BaseFormPage
                         ]
                     )
                     ->addLayout(
+                        __('Policy'),
+                        'policy',
+                        [
+                            Text::make(__('Title'), 'title')
+                                ->required(),
+                            CKEditor::make(__('Content'), 'content'),
+                            Checkbox::make('Lazy load', 'is_lazy'),
+                        ],
+                        validation: [
+                            'title' => 'required',
+                        ]
+                    )
+                    ->addLayout(
                         __('Contact'),
                         'contact',
                         [

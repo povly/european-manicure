@@ -80,6 +80,8 @@ class CustomSlider {
         if (this.loop) {
             this.cloneSlides();
             this.setInitialPosition();
+        } else if (this.centerSlides) {
+            this.setInitialPosition();
         }
         
         this.bindEvents();

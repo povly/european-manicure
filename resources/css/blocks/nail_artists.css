@@ -20,6 +20,8 @@
         display: flex;
         user-select: none;
         gap: 15px;
+        width: max-content;
+        margin: 0 auto;
     }
 
     &__slide {
@@ -43,14 +45,18 @@
             z-index: -1;
 
             &::before {
-                content: '';
+                content: "";
                 height: 136px;
                 position: absolute;
                 bottom: 0;
                 left: 0;
                 width: 100%;
                 z-index: 5;
-                background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+                background: linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0) 0%,
+                    #000 100%
+                );
             }
 
             img {
@@ -134,8 +140,13 @@
             }
 
             &-content {
-                transition: .3s;
-                transform: translateY(calc(fluid-type(1200px, 1920px, 20px, 40px) + var(--btn-height)));
+                transition: 0.3s;
+                transform: translateY(
+                    calc(
+                        fluid-type(1200px, 1920px, 20px, 40px) +
+                            var(--btn-height)
+                    )
+                );
             }
 
             &-image {

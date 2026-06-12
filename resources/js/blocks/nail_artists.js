@@ -29,7 +29,7 @@ function initNailArtists() {
 
     new window.CustomSlider('.nail-artists__splide', {
         breakpoints: {
-            0: { loop: true, centerSlides: true }
+            0: { loop: false, centerSlides: true }
         },
         onSlideChange: () => {
             if (window.lazyLoadInstance) {
