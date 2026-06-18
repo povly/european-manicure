@@ -66,64 +66,68 @@ new class extends Component {
     </div>
 
     @isset($data['reviews'])
-        <div class="reviews__splide" data-slider>
-            <ul class="reviews__list" data-slider-track>
-                @foreach($data['reviews'] as $review)
-                    <li class="reviews__slide" data-slider-slide>
+        <div class="reviews__splide embla">
+            <div class="embla__viewport">
+                <ul class="reviews__list embla__container">
+                    @foreach($data['reviews'] as $review)
+                        <li class="reviews__slide embla__slide">
+                            <div class="reviews__card">
 
-                        <div class="reviews__slide-top">
-                            @isset($review['image'])
-                                <div class="reviews__slide-image img-full">
-                                    <x-image
-                                        src="{{ $review['image'] }}"
-                                        lazy="{{ $this->isLazy() }}"
-                                        width="52"
-                                        height="52"
-                                    />
+                                <div class="reviews__slide-top">
+                                    @isset($review['image'])
+                                        <div class="reviews__slide-image img-full">
+                                            <x-image
+                                                src="{{ $review['image'] }}"
+                                                lazy="{{ $this->isLazy() }}"
+                                                width="52"
+                                                height="52"
+                                            />
+                                        </div>
+
+                                        @if(isset($review['platform_icon']) || isset($review['platform_text']))
+                                            <div class="reviews__slide-platform">
+                                                @isset($review['platform_icon'])
+                                                    <div class="reviews__slide-platform-icon">
+                                                        <x-image
+                                                            src="{{ $review['platform_icon'] }}"
+                                                            lazy="{{ $this->isLazy() }}"
+                                                            width="14"
+                                                            height="14"
+                                                        />
+                                                    </div>
+                                                @endisset
+                                                @isset($review['platform_text'])
+                                                    <span
+                                                        class="reviews__slide-platform-text">{{ $review['platform_text'] }}</span>
+                                                @endisset
+                                            </div>
+                                        @endif
+                                    @endisset
                                 </div>
 
-                                @if(isset($review['platform_icon']) || isset($review['platform_text']))
-                                    <div class="reviews__slide-platform">
-                                        @isset($review['platform_icon'])
-                                            <div class="reviews__slide-platform-icon">
-                                                <x-image
-                                                    src="{{ $review['platform_icon'] }}"
-                                                    lazy="{{ $this->isLazy() }}"
-                                                    width="14"
-                                                    height="14"
-                                                />
-                                            </div>
-                                        @endisset
-                                        @isset($review['platform_text'])
-                                            <span
-                                                class="reviews__slide-platform-text">{{ $review['platform_text'] }}</span>
-                                        @endisset
+                                @isset($review['description'])
+                                    <div class="reviews__slide-description">
+                                        <div class="reviews__slide-description-before">“</div>
+                                        <div class="reviews__slide-description-text">
+                                            {!! $review['description'] !!}
+                                        </div>
                                     </div>
-                                @endif
-                            @endisset
-                        </div>
+                                @endisset
 
-                        @isset($review['description'])
-                            <div class="reviews__slide-description">
-                                <div class="reviews__slide-description-before">“</div>
-                                <div class="reviews__slide-description-text">
-                                    {!! $review['description'] !!}
+                                <div class="reviews__slide-bottom">
+                                    @isset($review['name'])
+                                        <div class="reviews__slide-name">{{ $review['name'] }}</div>
+                                    @endisset
+
+                                    @isset($review['client_type'])
+                                        <div class="reviews__slide-client-type">{{ $review['client_type'] }}</div>
+                                    @endisset
                                 </div>
                             </div>
-                        @endisset
-
-                        <div class="reviews__slide-bottom">
-                            @isset($review['name'])
-                                <div class="reviews__slide-name">{{ $review['name'] }}</div>
-                            @endisset
-
-                            @isset($review['client_type'])
-                                <div class="reviews__slide-client-type">{{ $review['client_type'] }}</div>
-                            @endisset
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
     @endisset
 
@@ -133,10 +137,10 @@ new class extends Component {
                 <div class="reviews__subtitle reviews__subtitle--pc">{{ $data['subtitle'] }}</div>
             @endisset
 
-            <div class="reviews__controls p-arrows" data-slider-controls>
+            <div class="reviews__controls p-arrows">
                 <button
                     class="reviews__arrow p-arrow p-arrow--prev"
-                    data-slider-prev
+                    data-embla-prev
                     aria-label="Previous"
                 >
                     <svg width="81" height="81" viewBox="0 0 81 81" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +165,7 @@ new class extends Component {
 
                 <button
                     class="reviews__arrow p-arrow p-arrow--next"
-                    data-slider-next
+                    data-embla-next
                     aria-label="Next"
                 >
                     <svg width="81" height="81" viewBox="0 0 81 81" fill="none" xmlns="http://www.w3.org/2000/svg">

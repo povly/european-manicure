@@ -1,8 +1,14 @@
 .reviews {
     &__splide {
-        overflow: hidden;
+        --slide-spacing: 15px;
         position: relative;
         z-index: 2;
+
+        .embla {
+            &__viewport {
+                padding-bottom: 5px;
+            }
+        }
     }
 
     &__top {
@@ -40,22 +46,11 @@
     &__list {
         display: flex;
         user-select: none;
-        gap: 15px;
     }
 
     &__slide {
-        display: flex;
-        flex-direction: column;
-        flex-shrink: 0;
         width: 271px;
-        position: relative;
-        min-height: 311px;
-        padding: 20px;
-        border: 1px solid #000;
-        border-radius: 10px;
-        background: var(--color-white);
-        display: flex;
-        flex-direction: column;
+        flex-shrink: 0;
 
         &-top {
             display: flex;
@@ -100,7 +95,7 @@
             gap: 3px;
 
             &::before {
-                content: '';
+                content: "";
                 position: absolute;
                 left: 0;
                 top: 50%;
@@ -131,6 +126,19 @@
             overflow: hidden;
         }
     }
+
+    &__card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 311px;
+        padding: 20px;
+        border: 1px solid #000;
+        border-radius: 10px;
+        background: var(--color-white);
+    }
 }
 
 @media screen and (min-width: 1200px) {
@@ -149,14 +157,12 @@
             max-width: 100%;
         }
 
-        &__list {
-            gap: fluid-type(1200px, 1920px, 30px, 46px);
+        &__splide {
+            --slide-spacing: fluid-type(1200px, 1920px, 30px, 46px);
         }
 
         &__slide {
-            border-radius: fluid-type(1200px, 1920px, 14px, 20px);
             width: fluid-type(1200px, 1920px, 353px, 556px);
-            padding: fluid-type(1200px, 1920px, 20px, 30px);
 
             &-top {
                 margin-bottom: fluid-type(1200px, 1920px, 40px, 60px);
@@ -168,7 +174,8 @@
             }
 
             &-platform {
-                padding: fluid-type(1200px, 1920px, 9px, 15px) fluid-type(1200px, 1920px, 12px, 18px);
+                padding: fluid-type(1200px, 1920px, 9px, 15px)
+                    fluid-type(1200px, 1920px, 12px, 18px);
                 gap: fluid-type(1200px, 1920px, 5px, 7px);
                 border-radius: fluid-type(1200px, 1920px, 19px, 30px);
                 font-size: fluid-type(1200px, 1920px, 12px, 20px);
@@ -212,6 +219,11 @@
             }
         }
 
+        &__card {
+            border-radius: fluid-type(1200px, 1920px, 14px, 20px);
+            padding: fluid-type(1200px, 1920px, 20px, 30px);
+        }
+
         &__bottom {
             display: flex;
             align-items: center;
@@ -244,7 +256,7 @@
                 overflow: hidden;
                 border: fluid-type(1200px, 1920px, 1px, 2px) solid #fffaf4;
 
-                &:not(:first-child){
+                &:not(:first-child) {
                     margin-left: -10px;
                 }
             }

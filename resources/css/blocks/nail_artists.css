@@ -1,5 +1,6 @@
 .nail-artists {
     padding-top: 22px;
+    overflow: hidden;
 
     &__title {
         font-size: 123px;
@@ -11,28 +12,27 @@
     }
 
     &__splide {
-        overflow: hidden;
+        --slide-spacing: 15px;
         position: relative;
         z-index: 2;
+        padding: 0 var(--slide-spacing);
+        width: max-content;
+        margin: 0 auto;
+
+        .embla__viewport {
+            overflow: visible;
+        }
     }
 
     &__list {
         display: flex;
         user-select: none;
-        gap: 15px;
-        width: max-content;
-        margin: 0 auto;
     }
 
     &__slide {
-        display: flex;
-        flex-direction: column;
-        flex-shrink: 0;
         width: 271px;
-        position: relative;
         height: 380px;
-        padding: 20px;
-        justify-content: flex-end;
+        flex-shrink: 0;
 
         &-image {
             border-radius: 4px;
@@ -88,12 +88,24 @@
             margin-top: 15px;
         }
     }
+
+    &__card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 20px;
+        overflow: hidden;
+        border-radius: 4px;
+    }
 }
 
 @media screen and (min-width: 768px) {
     .nail-artists {
-        &__list {
-            gap: fluid-type(768px, 1200px, 25px, 29px);
+        &__splide {
+            --slide-spacing: fluid-type(768px, 1200px, 25px, 29px);
         }
 
         &__title {
@@ -124,14 +136,13 @@
             margin-left: fluid-type(1200px, 1920px, 100px, 140px);
         }
 
-        &__list {
-            gap: fluid-type(1200px, 1920px, 30px, 46px);
+        &__splide {
+            --slide-spacing: fluid-type(1200px, 1920px, 30px, 46px);
         }
 
         &__slide {
             width: fluid-type(1200px, 1920px, 353px, 556px);
             height: fluid-type(1200px, 1920px, 496px, 780px);
-            padding: fluid-type(1200px, 1920px, 20px, 40px);
 
             &:hover {
                 .nail-artists__slide-content {
@@ -163,6 +174,10 @@
                 margin-top: fluid-type(1200px, 1920px, 15px, 25px);
                 height: var(--btn-height, auto);
             }
+        }
+
+        &__card {
+            padding: fluid-type(1200px, 1920px, 20px, 40px);
         }
 
         &__controls {

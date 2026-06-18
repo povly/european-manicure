@@ -8,6 +8,9 @@ gsap.registerPlugin(Draggable);
 window.gsap = gsap;
 window.Draggable = Draggable;
 
+import EmblaCarousel from 'embla-carousel';
+window.EmblaCarousel = EmblaCarousel;
+
 function observeOnce(el, callback) {
     const observer = new IntersectionObserver(
         ([entry], obs) => {
@@ -21,5 +24,3 @@ function observeOnce(el, callback) {
     observer.observe(el);
 }
 window.observeOnce = observeOnce;
-
-import './components/slider.js';

@@ -3,18 +3,31 @@ function initReviews() {
     if (!section || section.dataset.initialized) return;
     section.dataset.initialized = 'true';
 
-    const container = section.querySelector('.reviews__splide');
-    if (container && container.querySelectorAll('[data-slider-slide]').length > 0) {
-        new window.CustomSlider('.reviews__splide', {
-            breakpoints: {
-                0: { loop: true, centerSlides: true },
-            },
-            onSlideChange: () => {
-                if (window.lazyLoadInstance) {
-                    window.lazyLoadInstance.update();
-                }
-            },
+    const viewport = section.querySelector('.embla__viewport');
+    if (viewport && viewport.querySelectorAll('.reviews__slide').length > 0) {
+        const prevBtn = section.querySelector('[data-embla-prev]');
+        const nextBtn = section.querySelector('[data-embla-next]');
+
+        const embla = window.EmblaCarousel(viewport, {
+            loop: true,
+            align: 'center',
+            containScroll: 'trimSnaps',
         });
+
+        const updateNav = () => {
+            if (prevBtn) prevBtn.disabled = !embla.canScrollPrev();
+            if (nextBtn) nextBtn.disabled = !embla.canScrollNext();
+        };
+
+        if (prevBtn) prevBtn.addEventListener('click', () => embla.scrollPrev());
+        if (nextBtn) nextBtn.addEventListener('click', () => embla.scrollNext());
+
+        embla.on('select', () => {
+            updateNav();
+            if (window.lazyLoadInstance) window.lazyLoadInstance.update();
+        });
+
+        embla.on('init', updateNav);
     }
 
     const title = section.querySelector('.reviews__title');

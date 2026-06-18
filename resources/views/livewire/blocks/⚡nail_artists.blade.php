@@ -28,43 +28,47 @@ new class extends Component {
     @endisset
 
     @isset($data['items'])
-        <div class="nail-artists__splide" data-slider>
-            <ul class="nail-artists__list" data-slider-track>
-                @foreach($data['items'] as $index => $item)
-                    <li class="nail-artists__slide" data-slider-slide>
-                        @isset($item['image'])
-                            <div class="nail-artists__slide-image img-full">
-                                <x-image
-                                    src="{{ $item['image'] }}"
-                                    lazy="{{ $this->isLazy() }}"
-                                />
+        <div class="nail-artists__splide embla">
+            <div class="embla__viewport">
+                <ul class="nail-artists__list embla__container">
+                    @foreach($data['items'] as $index => $item)
+                        <li class="nail-artists__slide embla__slide">
+                            <div class="nail-artists__card">
+                                @isset($item['image'])
+                                    <div class="nail-artists__slide-image img-full">
+                                        <x-image
+                                            src="{{ $item['image'] }}"
+                                            lazy="{{ $this->isLazy() }}"
+                                        />
+                                    </div>
+                                @endisset
+
+                                <div class="nail-artists__slide-content">
+                                    @isset($item['name'])
+                                        <h3 class="nail-artists__slide-name">{{ $item['name'] }}</h3>
+                                    @endisset
+
+                                    @isset($item['specialist'])
+                                        <p class="nail-artists__slide-specialist">{{ $item['specialist'] }}</p>
+                                    @endisset
+
+                                    @if(isset($item['button_text']) && isset($item['button_link']))
+                                        <a href="{{ $item['button_link'] }}" class="btn nail-artists__slide-button">
+                                            {{ $item['button_text'] }}
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
-                        @endisset
-
-                        <div class="nail-artists__slide-content">
-                            @isset($item['name'])
-                                <h3 class="nail-artists__slide-name">{{ $item['name'] }}</h3>
-                            @endisset
-
-                            @isset($item['specialist'])
-                                <p class="nail-artists__slide-specialist">{{ $item['specialist'] }}</p>
-                            @endisset
-
-                            @if(isset($item['button_text']) && isset($item['button_link']))
-                                <a href="{{ $item['button_link'] }}" class="btn nail-artists__slide-button">
-                                    {{ $item['button_text'] }}
-                                </a>
-                            @endif
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
 
-        <div class="nail-artists__controls p-arrows" data-slider-controls>
+        <div class="nail-artists__controls p-arrows">
             <button
                 class="nail-artists__arrow p-arrow p-arrow--prev"
-                data-slider-prev
+                data-embla-prev
                 aria-label="Previous"
             >
                 <svg width="81" height="81" viewBox="0 0 81 81" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -86,7 +90,7 @@ new class extends Component {
 
             <button
                 class="nail-artists__arrow p-arrow p-arrow--next"
-                data-slider-next
+                data-embla-next
                 aria-label="Next"
             >
                 <svg width="81" height="81" viewBox="0 0 81 81" fill="none" xmlns="http://www.w3.org/2000/svg">

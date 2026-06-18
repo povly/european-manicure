@@ -1,0 +1,16 @@
+.embla__viewport {
+    overflow: hidden;
+}
+
+.embla__container {
+    display: flex;
+    touch-action: pan-y pinch-zoom;
+    margin-left: calc(var(--slide-spacing, 0px) * -1);
+}
+
+.embla__slide {
+    box-sizing: content-box;
+    flex: 0 0 auto;
+    min-width: 0;
+    padding-left: var(--slide-spacing, 0px);
+}
